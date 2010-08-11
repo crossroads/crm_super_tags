@@ -1,0 +1,18 @@
+= styles_for :customfields
+
+.title_tools
+  = link_to_inline(:create_super_tag, new_admin_super_tag_path) << " | "
+  = link_to_inline(:options, options_admin_super_tags_path)
+
+.title
+  %span#create_super_tag_title Super tags
+
+.remote#options{ hidden }
+.remote#create_super_tag{ hidden }
+
+.list#super_tags
+  - unless @super_tags.empty?
+    = render :partial => "super_tag", :collection => @super_tags
+  - else
+    = render :partial => "common/empty"
+#paginate= render :partial => "common/paginate"

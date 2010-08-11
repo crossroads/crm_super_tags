@@ -3,6 +3,7 @@ class CreateCustomfields < ActiveRecord::Migration
     create_table :customfields, :force => true do |t|
       t.string      :uuid,        :limit => 36
       t.references  :user
+      t.references  :tag
       t.string      :field_name,  :limit => 64
       t.string      :field_type,  :limit => 32
       t.string      :field_label, :limit => 64
@@ -15,7 +16,7 @@ class CreateCustomfields < ActiveRecord::Migration
       t.boolean     :disabled
       t.timestamps
     end
-    add_index :customfields,:field_name 
+    add_index :customfields, :field_name
   end
 
   def self.down

@@ -1,0 +1,8 @@
+- remote_form_for([:admin, @super_tag], :html => one_submit_only(:acts_as_taggable_on_tag)) do |f|
+  = link_to_close new_admin_super_tag_path
+  = f.error_messages
+  = render :partial => "admin/super_tags/top_section", :locals => { :f => f }
+  .buttonbar
+    = f.submit "Create Super tag"
+    or
+    = link_to_cancel new_admin_super_tag_path
