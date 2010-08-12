@@ -41,19 +41,21 @@ class Customfield < ActiveRecord::Base
   belongs_to :user
   belongs_to :tag, :class_name => 'ActsAsTaggableOn::Tag'
 
+  FIELD_TYPES = %w[INTEGER DECIMAL FLOAT VARCHAR(255) DATE DATETIME TEXT]
+
   ## Default validations for model
   #
   validates_presence_of :tag, :message => "^Please specify a Super Tag."
 
   validates_presence_of :field_name, :message => "^Please enter a Field name."
   validates_format_of :field_name, :with => /\A[A-Za-z_]+\z/,:message => "^Please specify Field name without any special characters or numbers, spaces are not allowed - use [A-Za-z_] ", :if => :field_name_given?
-  validates_length_of :field_name, :maximum=>64, :message => "^The Field name must be less than 64 characters in length"
+  validates_length_of :field_name, :maximum => 64, :message => "^The Field name must be less than 64 characters in length"
 
   validates_presence_of :field_label, :message => "^Please enter a Field label."
-  validates_length_of :field_label, :maximum=>64, :message => "^The Field name must be less than 64 characters in length"
+  validates_length_of :field_label, :maximum => 64, :message => "^The Field name must be less than 64 characters in length"
 
   validates_presence_of :field_type, :message => "^Please specify a Field type."
-  validates_inclusion_of :field_type, :in => %w(Integer Decimal Float String Date Text), :message => "^Hack alert::Field type Please dont change the HTML source of this application."
+  validates_inclusion_of :field_type, :in => FIELD_TYPES, :message => "^Hack alert::Field type Please dont change the HTML source of this application."
 
   validates_presence_of :display_sequence, :message => "^Please enter a Sequence."
   validates_presence_of :display_block, :message => "^Please enter a Block."
@@ -65,10 +67,10 @@ class Customfield < ActiveRecord::Base
   validates_numericality_of :display_width, :only_integer => true, :message => "^Width can only be whole number.", :if => :display_width_given?
   validates_numericality_of :max_size, :only_integer => true, :message => "^Max size can only be whole number.", :if => :max_size_given?
 
-  validates_length_of :display_sequence, :maximum=>4, :message => "^Sequence can be 4 numbers long", :if => :display_sequence_given?
-  validates_length_of :display_block, :maximum=>4, :message => "^Block can be 4 numbers long", :if => :display_block_given?
-  validates_length_of :display_width, :maximum=>4, :message => "^Width can be 4 numbers long", :if => :display_width_given?
-  validates_length_of :max_size, :maximum=>4, :message => "^Max size can be 4 numbers long", :if => :max_size_given?
+  validates_length_of :display_sequence, :maximum => 4, :message => "^Sequence can be 4 numbers long", :if => :display_sequence_given?
+  validates_length_of :display_block, :maximum => 4, :message => "^Block can be 4 numbers long", :if => :display_block_given?
+  validates_length_of :display_width, :maximum => 4, :message => "^Width can be 4 numbers long", :if => :display_width_given?
+  validates_length_of :max_size, :maximum => 4, :message => "^Max size can be 4 numbers long", :if => :max_size_given?
 
   ## TODO - Added for now but need to get simple_column_search working later
   simple_column_search :field_name, :field_label, :table_name, :escape => lambda { |query| query.gsub(/[^\w\s\-\.']/, "").strip }
@@ -103,7 +105,9 @@ class Customfield < ActiveRecord::Base
   end
 
   def rename_column
-    connection.rename_column(self.table_name, self.field_name_was, self.field_name) if self.field_name_changed?
+    if self.field_name_changed? and self.errors.empty?
+      connection.rename_column(self.table_name, self.field_name_was, self.field_name)
+    end
   end
 
   # Default values provided through class methods.

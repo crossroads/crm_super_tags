@@ -32,6 +32,7 @@ class Admin::CustomfieldsController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def show
     @customfield = Customfield.find(params[:id])
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @customfield }
@@ -46,11 +47,9 @@ class Admin::CustomfieldsController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def new
     @customfield = Customfield.new(:user => @current_user, :tag_id => params[:tag_id])
-    @table_name = %w(Account Contact Opportunity)
-    @type = %w(Integer Decimal Float String Date Text)
     @users = User.except(@current_user).all
     @disabled = false
-    #@customfield.user=@current_user
+
     respond_to do |format|
       format.js   # new.js.rjs
       format.xml  { render :xml => @customfield }
@@ -64,8 +63,6 @@ class Admin::CustomfieldsController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def edit
     @customfield = Customfield.find(params[:id])
-    @table_name = %w(Account Contact Opportunity)
-    @type = %w(Integer Decimal Float String Date Text)
     @disabled = :disabled
 
     if params[:previous] =~ /(\d+)\z/
@@ -81,8 +78,6 @@ class Admin::CustomfieldsController < Admin::ApplicationController
   # POST /customfields.xml                                                     AJAX
   #----------------------------------------------------------------------------
   def create
-    @table_name = %w(Account Contact Opportunity)
-    @type = %w(Integer Decimal Float String Date Text)
     @customfield = Customfield.new(params[:customfield])
     @disabled = false
 
@@ -107,6 +102,7 @@ class Admin::CustomfieldsController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def update
     @customfield = Customfield.find(params[:id])
+
     respond_to do |format|
       if @customfield.update_attributes(params[:customfield])
         format.js
@@ -127,11 +123,13 @@ class Admin::CustomfieldsController < Admin::ApplicationController
   def destroy
     @customfield = Customfield.find(params[:id])
     @customfield.destroy if @customfield
+
     respond_to do |format|
       format.html { respond_to_destroy(:html) }
       format.js   { respond_to_destroy(:ajax) }
       format.xml  { head :ok }
     end
+
   rescue ActiveRecord::RecordNotFound
     respond_to_not_found(:html, :js, :xml)
   end
@@ -219,5 +217,4 @@ class Admin::CustomfieldsController < Admin::ApplicationController
       redirect_to(customfields_path)
     end
   end
-
 end

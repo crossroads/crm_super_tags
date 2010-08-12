@@ -25,9 +25,10 @@ end
 #----------------------------------------------------------------------------
 Factory.define :customfield do |c|
   c.user                { |a| a.association(:user) }
+  c.tag                 { |a| a.association(:tag) }
   c.field_name          "foo"
   c.field_label         "foo"
-  c.field_type          { %w(Integer String Text).rand }
+  c.field_type          { Customfield::FIELD_TYPES.rand }
   c.display_sequence    { rand(20) }
   c.display_block       { rand(20) }
   c.display_width       { rand(250) }

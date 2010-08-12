@@ -1,20 +1,20 @@
 %li[customfield]{ highlightable(dom_id(customfield, :tools)) }
   .tools{ invisible, :id => dom_id(customfield, :tools) }
     %small
-      =link_to_edit(customfield)
+      = link_to_edit(customfield)
   %tt
     Label
     %b
-      - if customfield.field_label? 
+      - if customfield.field_label?
         = customfield.field_label
-    name 
+    name
     %b
-      - if customfield.field_name? 
+      - if customfield.field_name?
         = customfield.field_name
-    for table 
+    for table
     %b
-      - if customfield.table_name? 
+      - if customfield.table_name?
         = customfield.table_name.pluralize
-    
+
     == added #{time_ago_in_words(customfield.created_at)} ago
     = hook(:customfield_bottom, self, :customfield => customfield)

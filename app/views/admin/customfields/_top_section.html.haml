@@ -7,7 +7,7 @@
       %td= spacer
       %td{ :valign => :top }
         .label.top.req Field type:
-        = f.select :field_type, @type, { :selected => @customfield.field_type.blank? ? nil : @customfield.field_type}, { :style => "width:140px" , :disabled=>@disabled}
+        = f.select :field_type, Customfield::FIELD_TYPES, { :selected => @customfield.field_type.blank? ? nil : @customfield.field_type }, { :style => "width:140px", :disabled => @disabled }
     %tr
       %td{ :valign => :top }
         .label.top.req Field label:
@@ -43,7 +43,5 @@
       %td{ :valign => :top }
         .label.top.req Sequence:
         = f.text_field :display_sequence, :style => "width:40px"
-
-
 
 = hook(:customfield_top_section_bottom, self, :f => f)

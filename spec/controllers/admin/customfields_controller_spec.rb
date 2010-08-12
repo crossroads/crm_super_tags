@@ -7,60 +7,6 @@ describe Admin::CustomfieldsController do
     set_current_tab(:customfields)
   end
 
-  # GET /customfields
-  # GET /customfields.xml
-  #----------------------------------------------------------------------------
-  describe "responding to GET index" do
-
-    it "should expose all customfields as @customfields and render [index] template" do
-      @customfields = [ Factory(:customfield, :user => @current_user) ]
-
-      get :index
-      assigns[:customfields].should == @customfields
-      response.should render_template("admin/customfields/index")
-    end
-    
-    describe "AJAX pagination" do
-      it "should pick up page number from params" do
-        @customfields = [ Factory(:customfield, :user => @current_user) ]
-        xhr :get, :index, :page => 42
-
-        assigns[:current_page].to_i.should == 42
-        assigns[:customfields].should == [] # page #42 should be empty if there's only one customfield ;-)
-        session[:customfields_current_page].to_i.should == 42
-        response.should render_template("admin/customfields/index")
-      end
-      
-      it "should pick up saved page number from session" do
-        session[:customfields_current_page] = 42
-        @customfields = [ Factory(:customfield, :user => @current_user) ]
-        xhr :get, :index
-
-        assigns[:current_page].should == 42
-        assigns[:customfields].should == []
-        response.should render_template("admin/customfields/index")
-      end
-    end
-
-    describe "with mime type of XML" do
-      it "should render all customfields as xml" do
-        @customfields = [ Factory(:customfield, :user => @current_user) ]
-        request.env["HTTP_ACCEPT"] = "application/xml"
-        get :index
-        response.body.should == @customfields.to_xml
-      end
-    end
-    describe "with mime type of XML" do
-      it "should render all customfields as xml" do
-        @customfields = [ Factory(:customfield, :user => @current_user) ]
-
-        request.env["HTTP_ACCEPT"] = "application/xml"
-        get :index
-        response.body.should == @customfields.to_xml
-      end
-    end
-  end
-
   # GET /customfields/1
   # GET /customfields/1.xml                                                    HTML
   #----------------------------------------------------------------------------
@@ -76,9 +22,8 @@ describe Admin::CustomfieldsController do
         assigns[:customfield].should == @customfield
         response.should render_template("admin/customfields/show")
       end
-
     end
-  
+
     describe "with mime type of XML" do
       it "should render the requested customfield as xml" do
         @customfield = Factory(:customfield, :id => 42)
@@ -104,7 +49,6 @@ describe Admin::CustomfieldsController do
         response.code.should == "404" # :not_found
       end
     end
-   
   end
 
   # GET /customfields/new
@@ -180,22 +124,22 @@ describe Admin::CustomfieldsController do
     describe "with valid params" do
 
       it "should expose a newly created customfield as @customfield and render [create] template" do
-        @customfield = Factory.build(:customfield, 
-            :field_name => "skype_address", 
-            :field_label => "Skype address", 
-            :field_type => "String", 
-            :max_size => 220, 
+        @customfield = Factory.build(:customfield,
+            :field_name => "skype_address",
+            :field_label => "Skype address",
+            :field_type => "String",
+            :max_size => 220,
             :display_sequence => 10,
             :display_block => 10,
             :display_width => 250,
             :table_name => "Acccount"
         )
         Customfield.stub!(:new).and_return(@customfield)
-        xhr :post, :create, :customfield => { 
-            :field_name => "skype_address", 
-            :field_label => "Skype address", 
-            :field_type => "String", 
-            :max_size => 220, 
+        xhr :post, :create, :customfield => {
+            :field_name => "skype_address",
+            :field_label => "Skype address",
+            :field_type => "String",
+            :max_size => 220,
             :display_sequence => 10,
             :display_block => 10,
             :display_width => 250,
@@ -209,11 +153,11 @@ describe Admin::CustomfieldsController do
         Customfield.stub!(:new).and_return(@customfield)
 
         request.env["HTTP_REFERER"] = "http://localhost/customfields"
-        xhr :post, :create, :customfield => {  
-            :field_name => "skype_address", 
-            :field_label => "Skype address", 
-            :field_type => "String", 
-            :max_size => 220, 
+        xhr :post, :create, :customfield => {
+            :field_name => "skype_address",
+            :field_label => "Skype address",
+            :field_type => "String",
+            :max_size => 220,
             :display_sequence => 10,
             :display_block => 10,
             :display_width => 250,
@@ -221,22 +165,21 @@ describe Admin::CustomfieldsController do
         assigns[:customfields].should == [ @customfield ]
       end
     end
-    
-    
+
     describe "with invalid params" do
       before(:each) do
         @customfield = Factory.build(:customfield, :field_name => "222 aaaa bbb ccc", :user => @current_user)
         Customfield.stub!(:new).and_return(@customfield)
       end
-      # Redraw [create] form 
+      # Redraw [create] form
       it "should redraw [Create Customfield] form with selected account" do
-        # This redraws [create] form 
+        # This redraws [create] form
         xhr :post, :create, :customfield => {}
         assigns(:customfield).should == @customfield
         response.should render_template("admin/customfields/create")
       end
     end
-  end  
+  end
 
   # PUT /customfields/1
   # PUT /customfields/1.xml                                                    AJAX
@@ -245,33 +188,31 @@ describe Admin::CustomfieldsController do
 
     describe "with valid params" do
       it "should update the requested customfield and render [update] template" do
-        @customfield = Factory(:customfield, :id => 42,             
-        	:field_name => "skype_address", 
-            :field_label => "Skype address", 
-            :field_type => "String", 
-            :max_size => 220, 
-            :display_sequence => 10,
-            :display_block => 10,
-            :display_width => 250,
-            :table_name => "Account" )
+        @customfield = Factory(:customfield, :id => 42,
+          :field_name => "skype_address",
+          :field_label => "Skype address",
+          :field_type => "VARCHAR(255)",
+          :max_size => 220,
+          :display_sequence => 10,
+          :display_block => 10,
+          :display_width => 250 )
 
-        xhr :put, :update, :id => 42, :customfield => {             
-        	:field_name => "skype_address", 
-            :field_label => "Skype address", 
-            :field_type => "String", 
-            :max_size => 220, 
+        xhr :put, :update, :id => 42, :customfield => {
+          :field_name => "skype_address",
+            :field_label => "Skype address",
+            :field_type => "VARCHAR(255)",
+            :max_size => 220,
             :display_sequence => 10,
             :display_block => 10,
-            :display_width => 250,
-            :table_name => Account }
+            :display_width => 250 }
         @customfield.reload.field_name.should == "skype_address"
         @customfield.reload.field_label.should == "Skype address"
-        @customfield.reload.field_type.should == "String"
+        @customfield.reload.field_type.should == "VARCHAR(255)"
         @customfield.reload.max_size.should == 220
         @customfield.reload.display_sequence.should == 10
         @customfield.reload.display_block.should == 10
         @customfield.reload.display_width.should == 250
-        @customfield.reload.table_name.should == "Account"
+        @customfield.reload.table_name.should == "customfields_for_tag_1"
         assigns(:customfield).should == @customfield
         response.should render_template("admin/customfields/update")
       end
@@ -295,10 +236,9 @@ describe Admin::CustomfieldsController do
         response.should render_template("admin/customfields/update")
       end
     end
-
   end
 
-  ## TODO 
+  ## TODO
 
   # GET /customfields/search/query                                                AJAX
   #----------------------------------------------------------------------------
@@ -387,5 +327,4 @@ describe Admin::CustomfieldsController do
   #    response.should render_template("admin/customfields/index")
   #  end
   #end
-
 end

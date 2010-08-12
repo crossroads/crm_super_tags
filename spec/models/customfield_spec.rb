@@ -29,14 +29,15 @@ describe Customfield do
 
   it "should create a new instance given valid attributes" do
     Customfield.create!(
-            :field_name => "skype_address", 
-            :field_label => "Skype address", 
-            :field_type => "String", 
-            :max_size => 220, 
-            :display_sequence => 10,
-            :display_block => 10,
-            :display_width => 250,
-            :table_name => "Account", :user => Factory(:user))
+      :field_name => "skype_address",
+      :field_label => "Skype address",
+      :field_type => "VARCHAR(255)",
+      :max_size => 220,
+      :display_sequence => 10,
+      :display_block => 10,
+      :display_width => 250,
+      :user => Factory(:user),
+      :tag => Factory(:tag)
+    )
   end
-
 end
