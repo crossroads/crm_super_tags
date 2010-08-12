@@ -1,0 +1,10 @@
+en-US:
+
+  # Views -> Admin -> Customfields.
+  #----------------------------------------------------------------------------
+  customfields: Customfields
+  create_customfield: Create Customfield
+
+  # Views -> Admin -> SuperTags.
+  #----------------------------------------------------------------------------
+  super_tags_small: super tags
