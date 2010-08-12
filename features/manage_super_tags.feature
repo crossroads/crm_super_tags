@@ -52,7 +52,7 @@ Feature: Manage custom fields by tag
       |customfield[display_width]|60|
       |customfield[display_block]|1|
       |customfield[display_sequence]|1|
-    And I select "Text" from "customfield[field_type]"
+    And I select "TEXT" from "customfield[field_type]"
     And I press "Create Customfield"
     Then I should see "Goods purpose"
 
