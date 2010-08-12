@@ -39,6 +39,14 @@ Feature: Manage custom fields by tag
     And I follow "Local Order"
     Then I should see "Customfields"
 
+  Scenario: Admin user should be able to delete a super tag
+    Given a logged in Admin user
+    And a tag named "Local Order"
+    When I go to the admin super tags page
+    And I move the mouse over "acts_as_taggable_on_tag_1"
+    And I follow "Delete"
+    Then I should not see "Local Order"
+
   Scenario: Admin user should be able to add a customfield
     Given a logged in Admin user
     And a tag named "Local Order"
@@ -68,10 +76,12 @@ Feature: Manage custom fields by tag
     And I press "Save Customfield"
     Then I should see "request_purpose"
 
-  Scenario: Admin user should be able to delete a super tag
+  Scenario: Admin user should be able to delete a customfield
     Given a logged in Admin user
     And a tag named "Local Order"
+    And a customfield named "goods_purpose"
     When I go to the admin super tags page
-    And I move the mouse over "acts_as_taggable_on_tag_1"
-    And I follow "Delete"
-    Then I should not see "Local Order"
+    And I follow "Local Order"
+    And I move the mouse over "customfield_1"
+    And I follow "Delete" within "#customfield_1"
+    Then I should not be able to see /goods_purpose/
