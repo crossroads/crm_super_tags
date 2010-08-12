@@ -15,7 +15,7 @@
       %td= spacer
       %td{ :valign => :top }
         .label.top.req Table:
-        = f.select :table_name, @table_name, { :selected => @customfield.table_name.blank? ? nil : @customfield.table_name}, { :style => "width:140px", :disabled=>@disabled}
+        = @customfield.table_name
 
     %tr
       %td{ :valign => :top }
