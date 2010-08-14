@@ -58,8 +58,6 @@ Feature: Manage custom fields by tag
       |customfield[field_label]|Goods purpose|
       |customfield[max_size]|1024|
       |customfield[display_width]|60|
-      |customfield[display_block]|1|
-      |customfield[display_sequence]|1|
     And I select "TEXT" from "customfield[field_type]"
     And I press "Create Customfield"
     Then I should see "Goods purpose"

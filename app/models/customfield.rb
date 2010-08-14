@@ -57,18 +57,12 @@ class Customfield < ActiveRecord::Base
   validates_presence_of :field_type, :message => "^Please specify a Field type."
   validates_inclusion_of :field_type, :in => FIELD_TYPES, :message => "^Hack alert::Field type Please dont change the HTML source of this application."
 
-  validates_presence_of :display_sequence, :message => "^Please enter a Sequence."
-  validates_presence_of :display_block, :message => "^Please enter a Block."
   validates_presence_of :display_width, :message => "^Please enter a Width."
   validates_presence_of :max_size, :message => "^Please enter a Max Size."
 
-  validates_numericality_of :display_sequence, :only_integer => true, :message => "^Sequence can only be whole number.", :if => :display_sequence_given?
-  validates_numericality_of :display_block, :only_integer => true, :message => "^Block can only be whole number.", :if => :display_block_given?
   validates_numericality_of :display_width, :only_integer => true, :message => "^Width can only be whole number.", :if => :display_width_given?
   validates_numericality_of :max_size, :only_integer => true, :message => "^Max size can only be whole number.", :if => :max_size_given?
 
-  validates_length_of :display_sequence, :maximum => 4, :message => "^Sequence can be 4 numbers long", :if => :display_sequence_given?
-  validates_length_of :display_block, :maximum => 4, :message => "^Block can be 4 numbers long", :if => :display_block_given?
   validates_length_of :display_width, :maximum => 4, :message => "^Width can be 4 numbers long", :if => :display_width_given?
   validates_length_of :max_size, :maximum => 4, :message => "^Max size can be 4 numbers long", :if => :max_size_given?
 
@@ -80,8 +74,6 @@ class Customfield < ActiveRecord::Base
     "field label"        => "customfields.field_label DESC",
     "field type"         => "customfields.field_type DESC",
     "table"              => "customfields.table_name DESC",
-    "display sequence"   => "customfields.display_sequence DESC",
-    "display block"      => "customfields.display_block_on DESC",
     "display width"      => "customfields.display_width DESC",
     "max size"           => "customfields.max_size DESC",
     "date created"       => "customfields.created_at DESC",
@@ -91,17 +83,19 @@ class Customfield < ActiveRecord::Base
   after_validation_on_update :rename_column
   after_create :add_column
 
-  def table_name
-    "customfields_for_tag_#{self.tag_id}"
+  def tag_class
+    "Tag#{self.tag_id}".constantize if self.tag_id
   end
 
-  def create_table
-    connection.create_table self.table_name unless connection.table_exists?(self.table_name)
+  def table_name
+    tag_class.table_name
   end
 
   def add_column
-    create_table
-    connection.add_column(self.table_name, self.field_name, self.field_type)
+    unless tag_class.columns.map(&:name).include?(self.field_name)
+      connection.add_column(self.table_name, self.field_name, self.field_type)
+      tag_class.reset_column_information
+    end
   end
 
   def rename_column
@@ -129,14 +123,6 @@ class Customfield < ActiveRecord::Base
     !field_label.blank?
   end
 
-  def display_sequence_given?
-    !display_sequence.blank?
-  end
-
-  def display_block_given?
-    !display_block.blank?
-  end
-
   def display_width_given?
     !display_width.blank?
   end
@@ -144,5 +130,4 @@ class Customfield < ActiveRecord::Base
   def max_size_given?
     !max_size.blank?
   end
-
 end

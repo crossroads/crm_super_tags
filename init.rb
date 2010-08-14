@@ -9,4 +9,4 @@ FatFreeCRM::Plugin.register(:crm_super_tags, initializer) do
            tab :admin, :text => "Super tags", :url => { :controller => "admin/super_tags" }
 end
 
-require "super_tag"
+require "crm_super_tags"

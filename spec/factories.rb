@@ -29,8 +29,6 @@ Factory.define :customfield do |c|
   c.field_name          "foo"
   c.field_label         "foo"
   c.field_type          { Customfield::FIELD_TYPES.rand }
-  c.display_sequence    { rand(20) }
-  c.display_block       { rand(20) }
   c.display_width       { rand(250) }
   c.max_size            { rand(64) }
   c.required            false

@@ -17,9 +17,6 @@ Spec::Runner.configure do |config|
   config.use_transactional_fixtures = false
 
   config.after(:each) do
-    table_names = ActiveRecord::Base.connection.tables.grep(/customfields_for_tag_/)
-    table_names.each { |table_name| ActiveRecord::Base.connection.drop_table(table_name) }
-
     DatabaseCleaner.clean
   end
 end

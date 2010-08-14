@@ -15,16 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------------------------
 
-module Admin::CustomfieldsHelper
-  def customfield(f, super_tag, field, params = {})
-    params = { :style => "width: #{field.display_width}px" }.merge(params)
-    field_name = "tag[#{super_tag.id}][#{field.field_name}]"
-
-    case field.field_type
-    when 'DATE', 'DATETIME', 'INTEGER', 'VARCHAR(255)'
-      f.text_field field_name, params
-    when 'TEXT'
-      f.textarea field_name, params
-    end
-  end
+[ Account, Campaign, Contact, Lead, Opportunity ].each do |klass|
+  klass.class_eval { include SuperTag }
 end

@@ -15,16 +15,24 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------------------------
 
-module Admin::CustomfieldsHelper
-  def customfield(f, super_tag, field, params = {})
-    params = { :style => "width: #{field.display_width}px" }.merge(params)
-    field_name = "tag[#{super_tag.id}][#{field.field_name}]"
-
-    case field.field_type
-    when 'DATE', 'DATETIME', 'INTEGER', 'VARCHAR(255)'
-      f.text_field field_name, params
-    when 'TEXT'
-      f.textarea field_name, params
+ActiveSupport::Dependencies.class_eval do
+  def load_missing_constant_with_tags(from_mod, const_name)
+    if const_name.to_s.match(/\ATag(\d+)\Z/)
+      table_name = "tag#{$1}s"
+      eval %Q{
+        class #{const_name} < ActiveRecord::Base
+          unless connection.table_exists?('#{table_name}')
+            connection.create_table('#{table_name}') do |t|
+              t.references :customizable, :polymorphic => true
+            end
+          end
+        end
+      }
+      const_name.to_s.constantize
+    else
+      load_missing_constant_without_tags(from_mod, const_name)
     end
   end
+
+  alias_method_chain :load_missing_constant, :tags
 end

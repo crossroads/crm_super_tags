@@ -3,7 +3,7 @@ Given /^a tag named "([^"]+)"$/ do |name|
 end
 
 Given /^a customfield named "([^"]+)"$/ do |name|
-  Factory(:customfield, :field_name => name, :tag => @tag)
+  Factory(:customfield, :field_name => name.downcase.gsub(' ', '_'), :field_label => name, :tag => @tag)
 end
 
 Given /^the following tags:$/ do |tags|

@@ -15,16 +15,35 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------------------------
 
-module Admin::CustomfieldsHelper
-  def customfield(f, super_tag, field, params = {})
-    params = { :style => "width: #{field.display_width}px" }.merge(params)
-    field_name = "tag[#{super_tag.id}][#{field.field_name}]"
+module SuperTag
+  def self.included(base)
+    #~ base.send :include, SuperTag::InstanceMethods
 
-    case field.field_type
-    when 'DATE', 'DATETIME', 'INTEGER', 'VARCHAR(255)'
-      f.text_field field_name, params
-    when 'TEXT'
-      f.textarea field_name, params
+    base.connection.tables.each do |table_name|
+      if table_name.match(/\A(tag\d+)s\Z/)
+        base.class_eval %Q{
+          has_one :#{$1}, :as => :customizable
+          accepts_nested_attributes_for :#{$1}
+        }
+      end
     end
   end
+
+  #~ module InstanceMethods
+    #~ def method_missing(method, *args)
+      #~ begin
+        #~ super
+      #~ rescue
+        #~ if method.to_s.match(/\A(build_)?(tag(\d+))\Z/)
+          #~ self.class.class_eval %Q{
+            #~ has_one :#{$2}, :as => :customizable
+            #~ accepts_nested_attributes_for :#{$2}
+          #~ }
+          #~ send(method)
+        #~ else
+          #~ raise
+        #~ end
+      #~ end
+    #~ end
+  #~ end
 end

@@ -35,13 +35,4 @@
         .label.top.req Disabled:
         = f.check_box :disabled
 
-    %tr
-      %td{ :valign => :top }
-        .label.top.req Block:
-        = f.text_field :display_block, :style => "width:40px"
-      %td= spacer
-      %td{ :valign => :top }
-        .label.top.req Sequence:
-        = f.text_field :display_sequence, :style => "width:40px"
-
-= hook(:customfield_top_section_bottom, self, :f => f)
+    = hook(:customfield_top_section_bottom, self, :f => f)
