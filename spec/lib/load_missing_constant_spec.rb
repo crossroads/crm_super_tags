@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe "load_missing_constant" do
-  after { Object.send(:remove_const, :Tag1) }
+  before { include SuperTag::Clean }
 
   it { Tag1.should_not be_nil }
 

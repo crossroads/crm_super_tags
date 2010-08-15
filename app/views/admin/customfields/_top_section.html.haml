@@ -7,7 +7,7 @@
       %td= spacer
       %td{ :valign => :top }
         .label.top.req Field type:
-        = f.select :field_type, Customfield::FIELD_TYPES, { :selected => @customfield.field_type.blank? ? nil : @customfield.field_type }, { :style => "width:140px", :disabled => @disabled }
+        = f.select :field_type, Customfield::FIELD_TYPES, { :style => "width:140px", :disabled => @disabled }
     %tr
       %td{ :valign => :top }
         .label.top.req Field label:

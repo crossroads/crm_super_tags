@@ -17,20 +17,27 @@
 
 ActiveSupport::Dependencies.class_eval do
   def load_missing_constant_with_tags(from_mod, const_name)
-    if const_name.to_s.match(/\ATag(\d+)\Z/)
-      table_name = "tag#{$1}s"
-      eval %Q{
-        class #{const_name} < ActiveRecord::Base
-          unless connection.table_exists?('#{table_name}')
-            connection.create_table('#{table_name}') do |t|
-              t.references :customizable, :polymorphic => true
-            end
+    begin
+      load_missing_constant_without_tags(from_mod, const_name)
+    rescue
+      if const_name.to_s.match(/\ATag(\d+)\Z/)
+
+        table_name = "tag#{$1}s"
+        unless ActiveRecord::Base.connection.table_exists?(table_name)
+          ActiveRecord::Base.connection.create_table(table_name) do |t|
+            t.references :customizable, :polymorphic => true
           end
         end
-      }
-      const_name.to_s.constantize
-    else
-      load_missing_constant_without_tags(from_mod, const_name)
+
+        klass = Class.new ActiveRecord::Base do
+          belongs_to :customizable, :polymorphic => true
+          validates_presence_of :customizable
+        end
+
+        Object.const_set(const_name, klass)
+      else
+        raise
+      end
     end
   end
 

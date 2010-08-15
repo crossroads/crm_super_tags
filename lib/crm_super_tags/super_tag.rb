@@ -46,4 +46,14 @@ module SuperTag
       #~ end
     #~ end
   #~ end
+
+  module Clean
+    ActiveRecord::Base.connection.tables.each do |table_name|
+      if table_name.match(/\Atag(\d+)s\Z/)
+        class_name = :"Tag#{$1}"
+        Object.send(:remove_const, class_name) if Object.send(:const_defined?, class_name)
+        ActiveRecord::Base.connection.drop_table(table_name)
+      end
+    end
+  end
 end

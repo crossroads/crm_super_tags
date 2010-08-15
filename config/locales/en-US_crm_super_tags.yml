@@ -7,4 +7,7 @@ en-US:
 
   # Views -> Admin -> SuperTags.
   #----------------------------------------------------------------------------
+  super_tag: Super tag
+  super_tags: Super tags
+  super_tag_small: super tag
   super_tags_small: super tags

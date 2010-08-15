@@ -47,7 +47,6 @@ class Admin::CustomfieldsController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def new
     @customfield = Customfield.new(:user => @current_user, :tag_id => params[:tag_id])
-    @users = User.except(@current_user).all
     @disabled = false
 
     respond_to do |format|
@@ -180,7 +179,7 @@ class Admin::CustomfieldsController < Admin::ApplicationController
     records = {
       :user => @current_user,
       :order => @current_user.pref[:customfields_sort_by] || Customfield.sort_by
-   }
+    }
     pages = {
       :page => current_page,
       :per_page => @current_user.pref[:customfields_per_page]
