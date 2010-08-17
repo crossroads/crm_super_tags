@@ -11,7 +11,7 @@ describe "load_missing_constant" do
     column_names.should include('customizable_type')
   end
 
-  it "should validate polymorphic association" do
+  it "should validate presence of customizable" do
     Tag1.create.should have(1).error_on(:customizable)
   end
 

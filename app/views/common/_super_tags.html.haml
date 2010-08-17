@@ -1,18 +1,19 @@
-- collapsed = session[:super_tags].nil?
-= subtitle :super_tags, collapsed, "Custom fields"
-.section
-  %small#super_tags_intro{ hidden_if(!collapsed) }
-    You can add custom information below, check with your administator if you need to add new fields here.
-  #super_tags{ hidden_if(collapsed) }
-    - f.object.tags.each do |super_tag|
+- f.object.tags.each do |super_tag|
+  - association = "tag#{super_tag.id}"
+  - collapsed = session[association].nil?
+  = subtitle association, collapsed, super_tag.name
+  .section
+    %small{ {:id => association + '_intro'}.merge(hidden_if(!collapsed)) }
+      = "Custom fields for #{super_tag.name}"
+    %div{ {:id => association}.merge(hidden_if(collapsed)) }
       %table{ :width => 500, :cellpadding => 0, :cellspacing => 0 }
-        - association = "tag#{super_tag.id}"
-        - @tag = f.object.send(association) || f.object.send("build_#{association}")
-        - f.fields_for(association, @tag) do |tag_form|
-          - super_tag.customfields.each_with_index do |custom, i|
-            - if i.even?
-              %tr
-            %td{ :valign => :top }
-              .label.top.req
-                = tag_form.label custom.field_name, custom.field_label + ':'
-              = customfield tag_form, super_tag, custom
+        - object = f.object.send(association) || f.object.send("build_#{association}")
+        - f.fields_for association, object do |tag_form|
+          - super_tag.customfields.in_groups_of(2) do |group|
+            %tr
+              - group.each do |custom|
+                %td{ :valign => :top }
+                  - if custom
+                    .label.top.req
+                      = tag_form.label custom.field_name, custom.field_label + ':'
+                    = customfield tag_form, super_tag, custom
