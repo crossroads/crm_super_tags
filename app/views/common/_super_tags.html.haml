@@ -6,10 +6,13 @@
   #super_tags{ hidden_if(collapsed) }
     - f.object.tags.each do |super_tag|
       %table{ :width => 500, :cellpadding => 0, :cellspacing => 0 }
-        - super_tag.customfields.each_with_index do |field, i|
-          - if i.even?
-            %tr
-          %td{ :valign => :top }
-            .label.top.req
-              = field.field_label
-            = customfield f, super_tag, field
+        - association = "tag#{super_tag.id}"
+        - @tag = f.object.send(association) || f.object.send("build_#{association}")
+        - f.fields_for(association, @tag) do |tag_form|
+          - super_tag.customfields.each_with_index do |custom, i|
+            - if i.even?
+              %tr
+            %td{ :valign => :top }
+              .label.top.req
+                = tag_form.label custom.field_name, custom.field_label + ':'
+              = customfield tag_form, super_tag, custom

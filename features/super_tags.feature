@@ -11,7 +11,7 @@ Feature: Add custom fields to content with super tags
     And an opportunity named "Refugee housing"
     When I go to the opportunity page
     And I follow "Edit"
-    And I fill in "tag1_attributes[goods_purpose]" with "Furnishing appartment"
+    And I fill in "Goods purpose:" with "Furnishing appartment"
     And I press "Save Opportunity"
     Then I should see "Furnishing appartment"
 

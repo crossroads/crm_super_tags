@@ -32,6 +32,10 @@ ActiveSupport::Dependencies.class_eval do
         klass = Class.new ActiveRecord::Base do
           belongs_to :customizable, :polymorphic => true
           validates_presence_of :customizable
+
+          Customfield.all(:conditions => {:tag_id => $1, :required => true}).each do |custom|
+            validates_presence_of custom.field_name
+          end
         end
 
         Object.const_set(const_name, klass)

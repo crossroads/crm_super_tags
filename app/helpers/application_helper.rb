@@ -15,16 +15,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------------------------
 
-module Admin::CustomfieldsHelper
+module ApplicationHelper
   def customfield(f, super_tag, field, params = {})
-    params = { :style => "width: #{field.display_width}px" }.merge(params)
-    field_name = "tag[#{super_tag.id}][#{field.field_name}]"
+    params = { :style => "width: #{field.display_width}px;" }.merge(params)
 
     case field.field_type
     when 'DATE', 'DATETIME', 'INTEGER', 'VARCHAR(255)'
-      f.text_field field_name, params
+      f.text_field field.field_name, params
     when 'TEXT'
-      f.textarea field_name, params
+      f.text_area field.field_name, params.merge(:style => params[:style] += " height: #{field.display_width}px;")
     end
   end
 end

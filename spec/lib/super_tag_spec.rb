@@ -1,12 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe SuperTag do
-  before :all do
-    include SuperTag::Clean
-
-    Tag1
-    Opportunity.class_eval { include SuperTag }
-  end
+  before { SuperTag::Clean.drop_tables }
 
   it "should define tag1" do
     Opportunity.new.tag1.should be_nil
