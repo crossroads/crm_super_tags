@@ -1,6 +1,6 @@
 - f.object.tags.each do |super_tag|
   - association = "tag#{super_tag.id}"
-  - collapsed = session[association].nil?
+  - collapsed = session[association.to_sym].nil?
   = subtitle association, collapsed, super_tag.name
   .section
     %small{ {:id => association + '_intro'}.merge(hidden_if(!collapsed)) }

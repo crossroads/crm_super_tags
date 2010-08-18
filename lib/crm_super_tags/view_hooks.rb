@@ -1,6 +1,6 @@
 class ViewHooks < FatFreeCRM::Callback::Base
 
-  [ :account, :contact, :lead, :opportunity ].each do |model|
+  [ :account, :campaign, :contact, :lead, :opportunity ].each do |model|
 
     # Called from app/views/%{model}/_top_section.html.haml
     #------------------------------------------------------

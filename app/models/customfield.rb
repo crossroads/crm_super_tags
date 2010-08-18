@@ -48,7 +48,7 @@ class Customfield < ActiveRecord::Base
   validates_presence_of :tag, :message => "^Please specify a Super Tag."
 
   validates_presence_of :field_name, :message => "^Please enter a Field name."
-  validates_format_of :field_name, :with => /\A[A-Za-z_]+\z/,:message => "^Please specify Field name without any special characters or numbers, spaces are not allowed - use [A-Za-z_] ", :if => :field_name_given?
+  validates_format_of :field_name, :with => /\A[A-Za-z_]+\z/, :allow_blank => true, :message => "^Please specify Field name without any special characters or numbers, spaces are not allowed - use [A-Za-z_] "
   validates_length_of :field_name, :maximum => 64, :message => "^The Field name must be less than 64 characters in length."
   validates_uniqueness_of :field_name, :scope => :tag_id, :message => "^The field name must be unique."
 
@@ -61,11 +61,11 @@ class Customfield < ActiveRecord::Base
   validates_presence_of :display_width, :message => "^Please enter a Width."
   validates_presence_of :max_size, :message => "^Please enter a Max Size."
 
-  validates_numericality_of :display_width, :only_integer => true, :message => "^Width can only be whole number.", :if => :display_width_given?
-  validates_numericality_of :max_size, :only_integer => true, :message => "^Max size can only be whole number.", :if => :max_size_given?
+  validates_numericality_of :display_width, :only_integer => true, :allow_blank => true, :message => "^Width can only be whole number."
+  validates_numericality_of :max_size, :only_integer => true, :allow_blank => true, :message => "^Max size can only be whole number."
 
-  validates_length_of :display_width, :maximum => 4, :message => "^Width can be 4 numbers long.", :if => :display_width_given?
-  validates_length_of :max_size, :maximum => 4, :message => "^Max size can be 4 numbers long.", :if => :max_size_given?
+  validates_length_of :display_width, :maximum => 4, :allow_blank => true, :message => "^Width can be 4 numbers long."
+  validates_length_of :max_size, :maximum => 4, :allow_blank => true, :message => "^Max size can be 4 numbers long."
 
   ## TODO - Added for now but need to get simple_column_search working later
   simple_column_search :field_name, :field_label, :table_name, :escape => lambda { |query| query.gsub(/[^\w\s\-\.']/, "").strip }
@@ -81,11 +81,15 @@ class Customfield < ActiveRecord::Base
     "date updated"       => "customfields.updated_at DESC"
   }
 
-  after_validation_on_update :rename_column
   after_create :add_column
+  after_validation_on_update :update_column
+
+  def tag_class_name
+    "Tag#{self.tag_id}" if self.tag_id
+  end
 
   def tag_class
-    "Tag#{self.tag_id}".constantize if self.tag_id
+    tag_class_name.try(:constantize)
   end
 
   def table_name
@@ -99,9 +103,16 @@ class Customfield < ActiveRecord::Base
     end
   end
 
-  def rename_column
-    if self.field_name_changed? and self.errors.empty?
-      connection.rename_column(self.table_name, self.field_name_was, self.field_name)
+  def update_column
+    if self.errors.empty?
+      if self.field_name_changed?
+        connection.rename_column(self.table_name, self.field_name_was, self.field_name)
+        tag_class.reset_column_information
+      end
+
+      if self.required_changed?
+        Object.send(:remove_const, tag_class_name.to_sym)
+      end
     end
   end
 
@@ -114,21 +125,5 @@ class Customfield < ActiveRecord::Base
   #----------------------------------------------------------------------------
   def name
     self.field_name
-  end
-
-  def field_name_given?
-    !field_name.blank?
-  end
-
-  def field_label_given?
-    !field_label.blank?
-  end
-
-  def display_width_given?
-    !display_width.blank?
-  end
-
-  def max_size_given?
-    !max_size.blank?
   end
 end

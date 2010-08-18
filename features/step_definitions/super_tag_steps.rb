@@ -3,13 +3,17 @@ Given /^a tag named "([^"]+)"$/ do |name|
 end
 
 Given /^a customfield named "([^"]+)"$/ do |name|
-  Factory(:customfield, :field_name => name.downcase.gsub(' ', '_'), :field_label => name, :tag => @tag)
+  Factory(:customfield, :field_name => name.downcase.gsub(' ', '_'), :field_label => name, :field_type => 'VARCHAR(255)', :tag => @tag)
 end
 
 Given /^the following tags:$/ do |tags|
   tags.hashes.each do |tag_hash|
     Factory(:tag, tag_hash)
   end
+end
+
+And /^the opportunity is tagged with "([^"]*)"$/ do |tag_name|
+  @opportunity.update_attribute(:tag_list, tag_name)
 end
 
 Then /^(?:|I )should not be able to see \/([^\/]*)\/(?: within "([^"]*)")?$/ do |regexp, selector|

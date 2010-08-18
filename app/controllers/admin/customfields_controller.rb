@@ -15,13 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------------------------
 
-####
-##
-#  custom fields - work in progress, shouldnt be used in any case until further development is completed,  Please do not use.
-##
-## TODO - choosen not to have auto complete search, but enable this
-####
-
 class Admin::CustomfieldsController < Admin::ApplicationController
   before_filter :require_user
   before_filter :set_current_tab, :only => [ :index, :show ]
