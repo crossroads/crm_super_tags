@@ -5,7 +5,7 @@ FatFreeCRM::Plugin.register(:crm_super_tags, initializer) do
         author "Ben Tillman"
        version "0.1"
    description "Admin module and view hooks for super tags"
-  dependencies :"acts-as-taggable-on", :haml, :simple_column_search, :crm_tags
+  dependencies :"acts-as-taggable-on", :haml, :simple_column_search
            tab :admin, :text => "Super tags", :url => { :controller => "admin/super_tags" }
 end
 
