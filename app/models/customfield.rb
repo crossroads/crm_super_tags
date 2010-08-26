@@ -82,7 +82,7 @@ class Customfield < ActiveRecord::Base
   }
 
   after_create :add_column
-  after_validation :update_column, :on => :update
+  after_validation_on_update :update_column
 
   def tag_class_name
     "Tag#{self.tag_id}" if self.tag_id
@@ -127,3 +127,4 @@ class Customfield < ActiveRecord::Base
     self.field_name
   end
 end
+
