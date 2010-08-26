@@ -1,6 +1,6 @@
 if @super_tag.valid?
   page[:create_super_tag_arrow].replace_html "&#9658;"
-  page[:create_super_tag_title].replace_html "Super tags"
+  page[:create_super_tag_title].replace_html "Super Tags"
   page.visual_effect :toggle_blind, :create_super_tag, :duration => 0.3, :afterFinish => 'function(effect) {effect.element.update("")}'
   page.insert_html :top, :super_tags, :partial => "super_tag", :collection => [ @super_tag ]
   page[dom_id(@super_tag)].visual_effect :highlight, :duration => 1.5
@@ -11,3 +11,4 @@ else
   page[:create_super_tag].visual_effect :shake, :duration => 0.25, :distance => 6
   page[:acts_as_taggable_on_tag_name].focus
 end
+
