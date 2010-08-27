@@ -64,9 +64,6 @@ class Customfield < ActiveRecord::Base
   validates_numericality_of :display_width, :only_integer => true, :allow_blank => true, :message => "^Width can only be whole number."
   validates_numericality_of :max_size, :only_integer => true, :allow_blank => true, :message => "^Max size can only be whole number."
 
-  validates_length_of :display_width, :maximum => 4, :allow_blank => true, :message => "^Width can be 4 numbers long."
-  validates_length_of :max_size, :maximum => 4, :allow_blank => true, :message => "^Max size can be 4 numbers long."
-
   ## TODO - Added for now but need to get simple_column_search working later
   simple_column_search :field_name, :field_label, :table_name, :escape => lambda { |query| query.gsub(/[^\w\s\-\.']/, "").strip }
 
