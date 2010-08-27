@@ -1,0 +1,12 @@
+fields_for(@asset) do |f|
+  sections = ""
+  @super_tags.each do |super_tag|
+    # Render supertag unless it has no custom fields.
+    unless super_tag.customfields.empty?
+      sections << render(:partial => "/common/super_tag_section",
+                         :locals => {:f => f, :super_tag => super_tag})
+    end
+  end
+  page[:super_tags].replace_html sections
+end
+

@@ -1,21 +1,8 @@
-- f.object.tags.each do |super_tag|
-  - unless super_tag.customfields.empty?
-    - association = "tag#{super_tag.id}"
-    - collapsed = session[association.to_sym].nil?
-    = subtitle association, collapsed, super_tag.name
-    .section
-      %small{ {:id => association + '_intro'}.merge(hidden_if(!collapsed)) }
-        = "Custom fields for #{super_tag.name}"
-      %div{ {:id => association}.merge(hidden_if(collapsed)) }
-        %table{ :width => 500, :cellpadding => 0, :cellspacing => 0 }
-          - object = f.object.send(association) || f.object.send("build_#{association}")
-          - f.fields_for association, object do |tag_form|
-            - super_tag.customfields.in_groups_of(2) do |group|
-              %tr
-                - group.each do |custom|
-                  %td{ :valign => :top }
-                    - if custom
-                      .label.top.req
-                        = tag_form.label custom.field_name, custom.field_label + ':'
-                      = customfield tag_form, super_tag, custom
+#super_tags
+  - f.object.tags.each do |super_tag|
+    - unless super_tag.customfields.empty?
+      = render :partial => "/common/super_tag_section", :locals => {:f => f, :super_tag => super_tag}
+  - controller = params[:controller]
+  - asset = controller.singularize
+  = javascript_tag "crm.set_tag_list_event('#{controller}', '#{asset}', '#{params[:id]}');"
 
