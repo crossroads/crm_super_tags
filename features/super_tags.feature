@@ -27,7 +27,7 @@ Feature: Add custom fields to content with super tags
     When I go to the opportunity page
     And I follow "Edit"
     And I fill in "opportunity_tag_list" with "normal tag, Local Order"
-    And I fill in "opportunity_name" with "Test Local Order"
+    And I fire the "change" event on "opportunity_tag_list"
     Then I should see "Custom fields for Local Order"
     When I follow "Local Order" within "#edit_opportunity"
     Then I should see "Goods purpose:"
