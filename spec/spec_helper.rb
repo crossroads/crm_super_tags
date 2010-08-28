@@ -1,3 +1,5 @@
+require 'rubygems'
+
 begin
   require File.dirname(__FILE__) + '/../../../../spec/spec_helper'
 rescue LoadError
@@ -20,3 +22,4 @@ Spec::Runner.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
