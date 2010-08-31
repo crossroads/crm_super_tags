@@ -19,7 +19,7 @@ require "faker"
 
 #----------------------------------------------------------------------------
 Factory.define :tag, :class => ActsAsTaggableOn::Tag do |t|
-  t.name                { Faker::Company.name }
+  t.name                { Faker::Name.first_name }
 end
 
 #----------------------------------------------------------------------------
