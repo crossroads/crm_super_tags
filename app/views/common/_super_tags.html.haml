@@ -1,8 +1,5 @@
 - controller = params[:controller]
 - asset = controller.singularize
-- # Build asset tags manually in case the asset validation failed.
-- if params[asset] && params[asset][:tag_list]
-  - f.object.tags = params[asset][:tag_list].split(",").map {|x| ActsAsTaggableOn::Tag.find_by_name(x.strip)}.compact.uniq
 #super_tags
   - f.object.tags.each do |super_tag|
     - unless super_tag.customfields.empty?

@@ -26,13 +26,11 @@ Feature: Add custom fields to content with super tags
     And an opportunity named "Refugee housing"
     When I go to the opportunity page
     And I follow "Edit"
-    And I fill in "opportunity_tag_list" with "normal tag, Local Order"
-    And I fire the "blur" event on "opportunity_tag_list"
-    Then I should see "Custom fields for Local Order"
-    And I fire the "click" event on css selector "#super_tags .subtitle a"
+    Then I should see "(comma separated, letters and digits only)"
+    And I fill in "fblist-maininput" with "Local Order,, a normal tag,,," within "#facebook-list"
     Then I should see "Goods purpose:"
-    When I fill in "opportunity_tag_list" with "normal tag, another un-super tag"
-    And I fire the "blur" event on "opportunity_tag_list"
+    When I fire the "click" event on css selector "#facebook-list a.closebutton"[0]
+    And I fill in "fblist-maininput" with "another normal tag," within "#facebook-list"
     Then I should not see "Custom fields for Local Order"
 
   Scenario: User should be able to create a new opportunity with AJAX loaded supertag fields
@@ -42,10 +40,9 @@ Feature: Add custom fields to content with super tags
     When I go to the opportunities page
     And I follow "Create Opportunity"
     And I fill in "opportunity_name" with "Local Order #L4345"
-    And I fill in "opportunity_tag_list" with "normal tag, Local Order"
-    And I fire the "blur" event on "opportunity_tag_list"
-    And I fire the "click" event on css selector "#super_tags .subtitle a"
-    And I fill in "Goods purpose:" with "Furnishing apartment"
+    And I fill in "fblist-maininput" with "Local Order,, normal tag,,," within "#facebook-list"
+    Then I should see "Goods purpose:"
+    When I fill in "Goods purpose:" with "Furnishing apartment"
     And I press "Create Opportunity"
     Then I should see "Local Order #L4345"
 
@@ -55,10 +52,10 @@ Feature: Add custom fields to content with super tags
     And a customfield named "Goods purpose"
     When I go to the opportunities page
     And I follow "Create Opportunity"
-    And I fill in "opportunity_tag_list" with "normal tag, Local Order"
-    And I fire the "blur" event on "opportunity_tag_list"
-    And I fire the "click" event on css selector "#super_tags .subtitle a"
-    And I fill in "Goods purpose:" with "Furnishing apartment"
+    And I fill in "opportunity_name" with ""
+    And I fill in "fblist-maininput" with "Local Order,, another tag,,," within "#facebook-list"
+    Then I should see "Goods purpose:"
+    When I fill in "Goods purpose:" with "Furnishing apartment"
     And I press "Create Opportunity"
     Then I should see "Please specify opportunity name."
     And I should see "Local Order" within "#super_tags"

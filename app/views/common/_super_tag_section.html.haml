@@ -1,5 +1,7 @@
 - association = "tag#{super_tag.id}"
 - collapsed = session[association.to_sym].nil?
+- # allow overriding of 'collapsed' options via direct url param
+- collapsed = params[:collapsed] == "yes" if not params[:collapsed].nil?
 = subtitle association, collapsed, super_tag.name
 .section
   %small{ {:id => association + '_intro'}.merge(hidden_if(!collapsed)) }

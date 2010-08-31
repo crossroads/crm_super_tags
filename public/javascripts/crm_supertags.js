@@ -1,10 +1,11 @@
 crm.set_tag_list_event = function(controller, asset, asset_id) {
-  // Sets the 'on_blur' hook for the tag_list, to AJAX load supertag form fields
-  // when the input changes.
-  Event.observe($(asset+'_tag_list'), 'change', function(event) {
-    var element = Event.element(event);
-    crm.load_supertag_fields(controller, element.value, asset_id);
+  // Adds the 'on_change' hook for the FacebookList, to AJAX load supertag form fields.
+  var supertag_list_options = $H({
+      onChange: function(){
+        crm.load_supertag_fields(controller, $('tag_list').value, asset_id);
+      }
   });
+  fbtaglist.options.update(supertag_list_options);
 };
 
 crm.load_supertag_fields = function(controller, tags, asset_id) {
@@ -13,8 +14,9 @@ crm.load_supertag_fields = function(controller, tags, asset_id) {
     asynchronous  : true,
     evalScripts:true,
     method:'get',
-    parameters: { tags     : tags,
-                  asset_id : asset_id }
+    parameters: { tags      : tags,
+                  asset_id  : asset_id,
+                  collapsed : "no" }
   });
 };
 
