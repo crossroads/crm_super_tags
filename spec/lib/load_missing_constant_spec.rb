@@ -11,13 +11,13 @@ describe "load_missing_constant" do
     column_names.should include('customizable_type')
   end
 
-  it "should validate presence of customizable" do
-    Tag1.create.should have(1).error_on(:customizable)
+  it "should validate presence of customizable type" do
+    Tag1.create.should have(1).error_on(:customizable_type)
   end
 
   it "should validate required fields" do
     Factory(:customfield, :field_name => 'one', :field_type => 'VARCHAR(255)', :required => true)
-
     Tag1.create.should have(1).error_on(:one)
   end
 end
+

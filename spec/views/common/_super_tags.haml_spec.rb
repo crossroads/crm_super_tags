@@ -11,10 +11,11 @@ describe "common/_super_tags.html.haml" do
 
   it "should render [edit super tag] form" do
     fields_for @opportunity do |f|
-      render :partial => 'common/super_tags', :locals => {:f => f}
+      render :partial => 'common/super_tags.html', :locals => {:f => f}
     end
 
     puts response.body
     response.should have_tag("input[id=opportunity_tag1_attributes_test]")
   end
 end
+

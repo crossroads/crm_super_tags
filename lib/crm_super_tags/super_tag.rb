@@ -41,3 +41,4 @@ module SuperTag
     end
   end
 end
+
