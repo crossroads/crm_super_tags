@@ -1,7 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe SuperTag do
-  before(:each) { SuperTag::Clean.drop_tables }
+  before(:each) do
+    # Tests pass perfectly without dropping the tables between each step...
+    # SuperTag::Clean.drop_tables
+  end
 
   it "should define tag1" do
     Opportunity.new.tag1.should be_nil
