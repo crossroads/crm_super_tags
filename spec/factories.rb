@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http:#www.gnu.org/licenses/>.
 #------------------------------------------------------------------------------
 
-require "faker"
+require 'ffaker'
 
 #----------------------------------------------------------------------------
 Factory.define :tag, :class => ActsAsTaggableOn::Tag do |t|
@@ -36,4 +36,3 @@ Factory.define :customfield do |c|
   c.updated_at          { Factory.next(:time) }
   c.created_at          { Factory.next(:time) }
 end
-

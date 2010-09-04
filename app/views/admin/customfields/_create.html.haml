@@ -1,4 +1,5 @@
-- remote_form_for([:admin, @customfield], :html => one_submit_only(:customfield)) do |f|
+
+= form_for([:admin, @customfield], :html => one_submit_only(:customfield), :remote => true) do |f|
   = link_to_close new_admin_customfield_path
   = f.error_messages
   = f.hidden_field :tag_id
