@@ -6,13 +6,14 @@ describe "admin/customfields/_create.html.haml" do
   before(:each) do
     login_and_assign(:admin => true)
 
-    assigns[:customfield] = Customfield.new
+    assign(:customfield, Customfield.new)
   end
 
   it "should render [create customfield] form" do
-    template.should_receive(:render).with(hash_including(:partial => "admin/customfields/top_section"))
+    render
 
-    render "admin/customfields/_create.html.haml"
+    template.should render_template(:partial => "admin/customfields/_top_section")
+
     response.should have_tag("form[class=new_customfield]")
   end
 end

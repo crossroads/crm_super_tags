@@ -1,9 +1,10 @@
-= styles_for :customfield, :opportunity
+
+= styles_for :super_tag, :opportunity
 
 #confirm{ hidden }
 .title_tools#menu
   = link_to_inline(:edit_super_tag, edit_admin_super_tag_path(@super_tag), :text => t(:edit)) + " | "
-  = link_to_function(t(:delete) + '?', confirm_delete(@super_tag))
+  = link_to_function(t(:delete) + '?', confirm_delete(@super_tag, :url => admin_super_tag_path(@super_tag)))
 .title#edit_super_tag_title= h(@super_tag.name)
 
 %div#edit_super_tag{ hidden }

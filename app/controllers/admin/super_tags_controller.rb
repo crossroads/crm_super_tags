@@ -52,7 +52,7 @@ class Admin::SuperTagsController < Admin::ApplicationController
     @super_tag = ActsAsTaggableOn::Tag.find(params[:id])
     @disabled = :disabled
 
-    if params[:previous] =~ /(\d+)\z/
+    if params[:previous].to_s =~ /(\d+)\z/
       @previous = ActsAsTaggableOn::Tag.find($1)
     end
 

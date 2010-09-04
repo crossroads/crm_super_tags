@@ -6,13 +6,14 @@ describe "admin/customfields/_edit.html.haml" do
   before(:each) do
     login_and_assign(:admin => true)
 
-    assigns[:customfield] = @customfield = Factory(:customfield)
+    assign(:customfield, @customfield = Factory(:customfield))
   end
 
   it "should render [edit customfield] form" do
-    template.should_receive(:render).with(hash_including(:partial => "admin/customfields/top_section"))
+    render
 
-    render "admin/customfields/_edit.html.haml"
+    template.should render_template(:partial => "admin/customfields/_top_section")
+
     response.should have_tag("form[class=edit_customfield]") do
       with_tag "input[type=hidden][id=customfield_user_id][value=#{@customfield.user_id}]"
     end

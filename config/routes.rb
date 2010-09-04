@@ -1,9 +1,22 @@
-ActionController::Routing::Routes.draw do |map|
+FatFreeCrm::Application.routes.draw do
 
-  map.namespace :admin do |admin|
-    admin.resources :super_tags, :collection => { :search => :get, :auto_complete => :post, :options => :get, :redraw => :post }
-    admin.resources :acts_as_taggable_on_tags, :controller => :super_tags
-    admin.resources :customfields, :except => :index, :collection => { :search => :get, :auto_complete => :post, :options => :get, :redraw => :post }
+  namespace :admin do
+    resources :super_tags do
+      collection do
+        post :auto_complete
+        get :options
+        post :redraw
+        get :search
+      end
+    end
+
+    resources :customfields, :except => :index do
+      collection do
+        post :auto_complete
+        get :options
+        post :redraw
+        get :search
+      end
+    end
   end
-
 end

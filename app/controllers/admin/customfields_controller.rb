@@ -57,7 +57,7 @@ class Admin::CustomfieldsController < Admin::ApplicationController
     @customfield = Customfield.find(params[:id])
     @disabled = :disabled
 
-    if params[:previous] =~ /(\d+)\z/
+    if params[:previous].to_s =~ /(\d+)\z/
       @previous = Customfield.find($1)
     end
 

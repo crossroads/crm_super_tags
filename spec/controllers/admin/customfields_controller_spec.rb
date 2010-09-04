@@ -36,14 +36,16 @@ describe Admin::CustomfieldsController do
 
     describe "customfield got deleted or otherwise unavailable" do
       it "should redirect to customfield index if the customfield got deleted" do
-        @customfield = Factory(:customfield, :user => @current_user).destroy
+        @customfield = Factory(:customfield, :user => @current_user)
+        @customfield.destroy
         get :show, :id => @customfield.id
         flash[:warning].should_not == nil
         response.should redirect_to(admin_customfields_path)
       end
 
       it "should return 404 (Not Found) XML error" do
-        @customfield = Factory(:customfield, :user => @current_user).destroy
+        @customfield = Factory(:customfield, :user => @current_user)
+        @customfield.destroy
         request.env["HTTP_ACCEPT"] = "application/xml"
         get :show, :id => @customfield.id
         response.code.should == "404" # :not_found
@@ -91,7 +93,8 @@ describe Admin::CustomfieldsController do
 
     describe "(customfield got deleted or is otherwise unavailable)" do
       it "should reload current page with the flash message if the customfield got deleted" do
-        @customfield = Factory(:customfield, :user => @current_user).destroy
+        @customfield = Factory(:customfield, :user => @current_user)
+        @customfield.destroy
 
         xhr :get, :edit, :id => @customfield.id
         flash[:warning].should_not == nil
@@ -219,7 +222,8 @@ describe Admin::CustomfieldsController do
 
       describe "customfield got deleted or otherwise unavailable" do
         it "should reload current page is the customfield got deleted" do
-          @customfield = Factory(:customfield, :user => @current_user).destroy
+          @customfield = Factory(:customfield, :user => @current_user)
+          @customfield.destroy
           xhr :put, :update, :id => @customfield.id
           flash[:warning].should_not == nil
           response.body.should == "window.location.reload();"

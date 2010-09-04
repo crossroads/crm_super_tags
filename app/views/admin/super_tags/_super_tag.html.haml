@@ -1,8 +1,8 @@
 %li[super_tag]{ highlightable(dom_id(super_tag, :tools)) }
   .tools{ invisible, :id => dom_id(super_tag, :tools) }
     %small
-      = link_to_edit(super_tag) + " | "
-      = link_to_delete(super_tag)
+      = link_to_edit(super_tag, :url => edit_admin_super_tag_path(super_tag)) + " | "
+      = link_to_delete(super_tag, :url => admin_super_tag_path(super_tag))
   %tt
     Name
     %b
