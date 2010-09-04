@@ -19,7 +19,7 @@ Feature: Manage custom fields by tag
     When I go to the admin super tags page
     And I follow "Create Super Tag"
     When I fill in "acts_as_taggable_on_tag[name]" with "Local Order"
-    And I press "Create Super tag"
+    And I press "Create Super Tag"
     Then I should see "Local Order"
 
   Scenario: Admin user should be able to edit a super tag
@@ -29,7 +29,7 @@ Feature: Manage custom fields by tag
     And I move the mouse over "acts_as_taggable_on_tag_1"
     And I follow "Edit"
     And I fill in "acts_as_taggable_on_tag[name]" with "Local Order Updated"
-    And I press "Save Super tag"
+    And I press "Save Super Tag"
     Then I should see "Local Order Updated"
 
   Scenario: Admin user should be able to view a super tag
@@ -83,3 +83,4 @@ Feature: Manage custom fields by tag
     And I move the mouse over "customfield_1"
     And I follow "Delete" within "#customfield_1"
     Then I should not be able to see /goods_purpose/
+

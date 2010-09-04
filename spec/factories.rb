@@ -19,7 +19,7 @@ require "faker"
 
 #----------------------------------------------------------------------------
 Factory.define :tag, :class => ActsAsTaggableOn::Tag do |t|
-  t.name                { Faker::Company.name }
+  t.name                { Faker::Name.first_name }
 end
 
 #----------------------------------------------------------------------------
@@ -29,10 +29,11 @@ Factory.define :customfield do |c|
   c.field_name          "foo"
   c.field_label         "foo"
   c.field_type          { Customfield::FIELD_TYPES.rand }
-  c.display_width       { rand(250) }
+  c.display_width       { rand(100) + 100 }
   c.max_size            { rand(64) }
   c.required            false
   c.disabled            false
   c.updated_at          { Factory.next(:time) }
   c.created_at          { Factory.next(:time) }
 end
+

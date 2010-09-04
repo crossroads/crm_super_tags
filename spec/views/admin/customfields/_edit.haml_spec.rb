@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
 describe "admin/customfields/_edit.html.haml" do
-  include Admin::CustomfieldsHelper
 
   before(:each) do
     login_and_assign(:admin => true)
@@ -19,3 +18,4 @@ describe "admin/customfields/_edit.html.haml" do
     end
   end
 end
+

@@ -215,7 +215,7 @@ describe Admin::CustomfieldsController do
         @customfield.reload.display_sequence.should == 10
         @customfield.reload.display_block.should == 10
         @customfield.reload.display_width.should == 250
-        @customfield.reload.table_name.should == "customfields_for_tag_1"
+        @customfield.reload.table_name.should == "tag1s"
         assigns(:customfield).should == @customfield
         response.should render_template("admin/customfields/update")
       end
@@ -332,3 +332,4 @@ describe Admin::CustomfieldsController do
   #  end
   #end
 end
+

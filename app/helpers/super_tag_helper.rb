@@ -10,3 +10,4 @@ module SuperTagHelper
     end
   end
 end
+

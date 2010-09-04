@@ -19,4 +19,6 @@ FatFreeCrm::Application.routes.draw do
       end
     end
   end
+
+  match ':controller/super_tags' => '#super_tags'
 end

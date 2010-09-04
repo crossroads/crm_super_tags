@@ -4,6 +4,7 @@
     = f.error_messages
     = render :partial => "admin/super_tags/top_section", :locals => { :f => f, :edit => true }
     .buttonbar
-      = f.submit "Save Super tag"
+      = f.submit "Save Super Tag"
       or
       = link_to_cancel edit_admin_super_tag_path(@super_tag)
+
