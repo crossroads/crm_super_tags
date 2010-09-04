@@ -1,12 +1,19 @@
 fields_for(@asset) do |f|
   sections = ""
-  @super_tags.each do |super_tag|
+  tag_forms = {}
+  @super_tags.each_with_index do |super_tag, i|
     # Render supertag unless it has no custom fields.
     unless super_tag.customfields.empty?
-      sections << render(:partial => "/common/super_tag_section",
-                         :locals => {:f => f, :super_tag => super_tag})
+      tag_forms[super_tag.name] = "supertag-form#{i}"
+      sections << %Q{<div id="supertag-form#{i}">}
+        sections << render(:partial => "/common/super_tag_section",
+                           :locals => {:f => f, :super_tag => super_tag})
+      sections << %Q{</div>}
     end
   end
-  page[:super_tags].replace_html sections
+
+  page[:super_tags].insert sections
+
+  page << "loadedSupertagForms.update(#{tag_forms.to_json});"
 end
 
