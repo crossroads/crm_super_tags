@@ -8,5 +8,6 @@
       %div{:id => "supertag-form#{i}"}
         = render :partial => "/common/super_tag_section", :locals => {:f => f, :super_tag => super_tag}
   = javascript_tag "crm.set_tag_list_event('#{controller}', '#{asset}', '#{params[:id]}');"
-  = javascript_tag "loadedSupertagForms.update(#{tag_forms.to_json});"
+  - # Reset 'loadedSupertagForms' hash.
+  = javascript_tag "loadedSupertagForms = $H(#{tag_forms.to_json});"
 
