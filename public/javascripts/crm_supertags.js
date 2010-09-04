@@ -31,6 +31,11 @@ crm.load_supertag_fields = function(controller, tags, asset_id) {
   });
 };
 
+crm.close_all_forms = function() {
+  // Fires an 'onclick' event on all '.close' buttons in the DOM. (closes any current edit forms)
+  $$('.close').each(function(el){el.onclick();});
+};
+
 // {'supertag' => 'div element id'}
 var loadedSupertagForms = new Hash();
 
