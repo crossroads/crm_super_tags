@@ -20,9 +20,10 @@ Then /^(?:|I )should not be able to see \/([^\/]*)\/(?: within "([^"]*)")?$/ do 
   regexp = Regexp.new(regexp)
   with_scope(selector) do
     if page.respond_to? :should
-      page.should have_xpath('//*', :text => regexp, :visible => false)
+      page.should_not have_xpath('//*', :text => regexp, :visible => false)
     else
-      assert page.has_xpath?('//*', :text => regexp, :visible => false)
+      assert !page.has_xpath?('//*', :text => regexp, :visible => false)
     end
   end
 end
+
