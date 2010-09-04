@@ -1,5 +1,5 @@
-module ApplicationHelper
-  def customfield(f, super_tag, field, params = {})
+module SuperTagHelper
+  def customfield_tag(f, super_tag, field, params = {})
     params = { :style => "width: #{field.display_width}px;" }.merge(params)
 
     case field.field_type

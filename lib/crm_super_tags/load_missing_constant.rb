@@ -16,7 +16,7 @@ ActiveSupport::Dependencies.class_eval do
           belongs_to :customizable, :polymorphic => true
           validates_presence_of :customizable
 
-          Customfield.all(:conditions => {:tag_id => $1, :required => true}).each do |custom|
+          Customfield.where(:tag_id => $1, :required => true).each do |custom|
             validates_presence_of custom.field_name
           end
         end

@@ -10,3 +10,5 @@ FatFreeCRM::Plugin.register(:crm_super_tags, self) do
 end
 
 require "crm_super_tags"
+
+ActionView::Base.send(:include, SuperTagHelper)

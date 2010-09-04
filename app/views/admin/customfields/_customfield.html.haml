@@ -1,8 +1,8 @@
 %li[customfield]{ highlightable(dom_id(customfield, :tools)) }
   .tools{ invisible, :id => dom_id(customfield, :tools) }
     %small
-      = link_to_edit(customfield, :url => edit_admin_customfield_path) + " | "
-      = link_to_delete(customfield, :url => admin_customfield_path)
+      = link_to_edit(customfield, :url => edit_admin_customfield_path(customfield)) + " | "
+      = link_to_delete(customfield, :url => admin_customfield_path(customfield))
   %tt
     Label
     %b
