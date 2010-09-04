@@ -1,5 +1,6 @@
+//----------------------------------------------------------------------------
+// Adds the 'on_change' hook for the FacebookList, to AJAX load supertag form fields.
 crm.set_tag_list_event = function(controller, asset, asset_id) {
-  // Adds the 'on_change' hook for the FacebookList, to AJAX load supertag form fields.
   var extra_supertag_options = $H({
       onAdd: function(tag){
         // load the supertag form fields if not already loaded.
@@ -19,8 +20,9 @@ crm.set_tag_list_event = function(controller, asset, asset_id) {
   fbtaglist.options.update(extra_supertag_options);
 };
 
+//----------------------------------------------------------------------------
+// AJAX loads the form fields for each super_tag
 crm.load_supertag_fields = function(controller, tags, asset_id) {
-  // AJAX loads the form fields for each super_tag
   new Ajax.Request('/' + controller + '/super_tags', {
     asynchronous  : true,
     evalScripts:true,
@@ -31,11 +33,14 @@ crm.load_supertag_fields = function(controller, tags, asset_id) {
   });
 };
 
+//----------------------------------------------------------------------------
+// Fires an 'onclick' event on all '.close' buttons in the DOM.
+// (closes any current edit forms)
 crm.close_all_forms = function() {
-  // Fires an 'onclick' event on all '.close' buttons in the DOM. (closes any current edit forms)
   $$('.close').each(function(el){el.onclick();});
 };
 
+// Initialize the hash to store which supertag forms have been loaded.
 // {'supertag' => 'div element id'}
 var loadedSupertagForms = new Hash();
 
