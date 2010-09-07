@@ -4,13 +4,13 @@ crm.set_tag_list_event = function(controller, asset, asset_id) {
   var extra_supertag_options = $H({
       onAdd: function(tag){
         // load the supertag form fields if not already loaded.
-        if(!loadedSupertagForms.get(tag)){
+        if(!loadedSupertagForms.get(tag.toLowerCase())){
           crm.load_supertag_fields(controller, tag, asset_id);
         };
       },
       onDispose: function(tag){
         // remove the supertag form fields if they were loaded.
-        var form_id = loadedSupertagForms.get(tag);
+        var form_id = loadedSupertagForms.get(tag.toLowerCase());
         if(form_id){
           $(form_id).remove();
           loadedSupertagForms.unset(tag);
