@@ -10,7 +10,7 @@ class SupertagViewHooks < FatFreeCRM::Callback::Base
 
   def javascript_includes(view, context = {})
     # Load the crm_supertags.js extensions
-    view.javascript_include_tag "/plugin_assets/crm_super_tags/javascripts/crm_supertags.js"
+    view.javascript_include_tag 'crm_supertags.js'
   end
 
 end
