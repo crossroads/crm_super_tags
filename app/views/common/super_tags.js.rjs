@@ -4,7 +4,7 @@ fields_for(@asset) do |f|
   @super_tags.each_with_index do |super_tag, i|
     # Render supertag unless it has no custom fields.
     unless super_tag.customfields.empty?
-      tag_forms[super_tag.name] = "supertag-form#{i}"
+      tag_forms[super_tag.name.downcase] = "supertag-form#{i}"
       sections << %Q{<div id="supertag-form#{i}">}
         sections << render(:partial => "/common/super_tag_section",
                            :locals => {:f => f, :super_tag => super_tag})
