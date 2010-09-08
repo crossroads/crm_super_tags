@@ -10,7 +10,8 @@ crm.set_tag_list_event = function(controller, asset, asset_id) {
       },
       onDispose: function(tag){
         // remove the supertag form fields if they were loaded.
-        var form_id = loadedSupertagForms.get(tag.toLowerCase());
+        tag = tag.toLowerCase();
+        var form_id = loadedSupertagForms.get(tag);
         if(form_id){
           $(form_id).remove();
           loadedSupertagForms.unset(tag);
