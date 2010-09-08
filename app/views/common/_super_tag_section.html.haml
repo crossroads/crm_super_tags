@@ -9,7 +9,7 @@
   %div{ {:id => association}.merge(hidden_if(collapsed)) }
     %table{ :width => 500, :cellpadding => 0, :cellspacing => 0 }
       - object = f.object.send(association) || f.object.send("build_#{association}")
-      - f.fields_for association, object do |tag_form|
+      = f.fields_for association, object do |tag_form|
         - super_tag.customfields.in_groups_of(2) do |group|
           %tr
             - group.each do |custom|
