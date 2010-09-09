@@ -1,7 +1,8 @@
 - association = "tag#{super_tag.id}"
 - collapsed = session[association.to_sym].nil?
 - # allow overriding of 'collapsed' options via direct url param
-- collapsed = params[:collapsed] == "yes" if not params[:collapsed].nil?
+- #collapsed = params[:collapsed] == "yes" if not params[:collapsed].nil?
+- collapsed = false  # Supertag fields are always un-collapsed until toggled.
 = subtitle association, collapsed, super_tag.name
 .section
   %small{ {:id => association + '_intro'}.merge(hidden_if(!collapsed)) }
@@ -18,3 +19,4 @@
                   .label.top.req
                     = tag_form.label custom.field_name, custom.field_label + ':'
                   = customfield_tag tag_form, super_tag, custom
+
