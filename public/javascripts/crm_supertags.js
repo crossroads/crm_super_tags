@@ -2,9 +2,16 @@
 // Adds the 'on_change' hook for the FacebookList, to AJAX load supertag form fields.
 crm.set_tag_list_event = function(controller, asset, asset_id) {
   var extra_supertag_options = $H({
-      onAdd: function(tag){
+      onAdd: function(tag, el){
         // load the supertag form fields if not already loaded.
-        if(!loadedSupertagForms.get(tag.toLowerCase())){
+        var alreadyAdded = (fbtaglist.bits.values().findAll(function(s){return s.toLowerCase() == tag.toLowerCase() }).length > 1);
+        if(alreadyAdded){
+          // turn off the onDispose hook for this call to .dispose()
+          var onDisposeHook = fbtaglist.options.get('onDispose');
+          fbtaglist.options.set('onDispose', function(el){});
+          fbtaglist.dispose(el);
+          fbtaglist.options.set('onDispose', onDisposeHook);
+        } else {
           crm.load_supertag_fields(controller, tag, asset_id);
         };
       },
