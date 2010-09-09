@@ -13,7 +13,7 @@ ActiveRecord::Base.logger = Logger.new(plugin_spec_dir + "/debug.log")
 require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation, {:except => ['settings']}
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   config.after(:each) do
