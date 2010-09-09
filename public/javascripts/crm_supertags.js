@@ -3,7 +3,7 @@
 crm.set_tag_list_event = function(controller, asset, asset_id) {
   var extra_supertag_options = $H({
       onAdd: function(tag, el){
-        // load the supertag form fields if not already loaded.
+        // Check that the tag is not being added more than twice (case INSENSITIVE)
         var alreadyAdded = (fbtaglist.bits.values().findAll(function(s){return s.toLowerCase() == tag.toLowerCase() }).length > 1);
         if(alreadyAdded){
           // turn off the onDispose hook for this call to .dispose()
@@ -12,6 +12,7 @@ crm.set_tag_list_event = function(controller, asset, asset_id) {
           fbtaglist.dispose(el);
           fbtaglist.options.set('onDispose', onDisposeHook);
         } else {
+          // load the supertag form fields if not already loaded.
           crm.load_supertag_fields(controller, tag, asset_id);
         };
       },
