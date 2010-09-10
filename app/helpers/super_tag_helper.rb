@@ -6,7 +6,7 @@ module SuperTagHelper
     when 'DATE', 'DATETIME', 'INTEGER', 'VARCHAR(255)'
       f.text_field field.field_name, params
     when 'TEXT'
-      f.text_area field.field_name, params.merge(:style => params[:style] += " height: #{field.display_width}px;")
+      f.text_area field.field_name, params.merge(:style => params[:style] += " height: #{(field.display_width * 2/3).to_i}px;")
     end
   end
 end
