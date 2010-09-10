@@ -2,10 +2,10 @@
 - asset = controller.singularize
 - tag_forms = {}
 #super_tags
-  - f.object.tags.each_with_index do |super_tag, i|
+  - f.object.tags.each do |super_tag|
     - unless super_tag.customfields.empty?
-      - tag_forms[super_tag.name.downcase] = "supertag-form#{i}"
-      %div{:id => "supertag-form#{i}"}
+      - tag_forms[super_tag.name.downcase] = "supertag-form#{super_tag.id}"
+      %div{:id => "supertag-form#{super_tag.id}"}
         = render :partial => "/common/super_tag_section", :locals => {:f => f, :super_tag => super_tag}
   = javascript_tag "crm.set_tag_list_event('#{controller}', '#{asset}', '#{params[:id]}');"
   - # Reset 'loadedSupertagForms' hash.
