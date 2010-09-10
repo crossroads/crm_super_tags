@@ -84,7 +84,7 @@ class Customfield < ActiveRecord::Base
 
   def set_defaults
     self.display_width ||= 220
-    unless self.field_name
+    if self.field_name.blank?
       column_name = self.field_label.underscore.gsub(/[_ ]+/,'_').gsub(/[^a-z0-9_]/,'')
       column_name << "_customfield" if self.respond_to?(column_name)
       self.field_name = column_name
