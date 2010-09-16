@@ -7,7 +7,11 @@
       - tag_forms[super_tag.name.downcase] = "supertag-form#{super_tag.id}"
       %div{:id => "supertag-form#{super_tag.id}"}
         = render :partial => "/common/super_tag_section", :locals => {:f => f, :super_tag => super_tag}
-  = javascript_tag "crm.set_tag_list_event('#{controller}', '#{asset}', '#{params[:id]}');"
-  - # Reset 'loadedSupertagForms' hash.
-  = javascript_tag "loadedSupertagForms = $H(#{tag_forms.to_json});"
+  :javascript
+    // if fbtaglist is initialized..
+    if(fbtaglist) {
+      crm.set_tag_list_event('#{controller}', '#{asset}', '#{params[:id]}');
+      // Reset 'loadedSupertagForms' hash.
+      loadedSupertagForms = $H(#{tag_forms.to_json});
+    }
 
