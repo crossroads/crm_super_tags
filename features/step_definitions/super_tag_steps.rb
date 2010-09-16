@@ -2,7 +2,7 @@ Given /^a tag named "([^"]+)"$/ do |name|
   @tag = Factory(:tag, :name => name)
 end
 
-Given /^a customfield named "([^"]+)"$/ do |name|
+Given /^the tag has a customfield named "([^"]+)"$/ do |name|
   Factory(:customfield, :field_name => name.downcase.gsub(' ', '_'), :field_label => name, :field_type => 'VARCHAR(255)', :tag => @tag)
 end
 

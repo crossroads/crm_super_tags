@@ -7,7 +7,7 @@ Feature: Add custom fields to content with super tags
   Scenario: User should be able to edit a super tagged opportunity
     Given a logged in user
     And a tag named "Local Order"
-    And a customfield named "Goods purpose"
+    And the tag has a customfield named "Goods purpose"
     And an opportunity named "Refugee housing"
     And the opportunity is tagged with "Local Order"
     When I go to the opportunity page
@@ -22,7 +22,7 @@ Feature: Add custom fields to content with super tags
   Scenario: Super tag fields should be AJAX loaded when the tags input is changed
     Given a logged in user
     And a tag named "Local Order"
-    And a customfield named "Goods purpose"
+    And the tag has a customfield named "Goods purpose"
     And an opportunity named "Refugee housing"
     When I go to the opportunity page
     And I follow "Edit"
@@ -36,7 +36,7 @@ Feature: Add custom fields to content with super tags
   Scenario: User should be able to create a new opportunity with AJAX loaded supertag fields
     Given a logged in user
     And a tag named "Local Order"
-    And a customfield named "Goods purpose"
+    And the tag has a customfield named "Goods purpose"
     When I go to the opportunities page
     And I follow "Create Opportunity"
     And I fill in "opportunity_name" with "Local Order #L4345"
@@ -49,7 +49,7 @@ Feature: Add custom fields to content with super tags
   Scenario: When a new opportunity fails validation, supertag fields should still be shown
     Given a logged in user
     And a tag named "Local Order"
-    And a customfield named "Goods purpose"
+    And the tag has a customfield named "Goods purpose"
     When I go to the opportunities page
     And I follow "Create Opportunity"
     And I fill in "opportunity_name" with ""
