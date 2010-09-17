@@ -64,9 +64,6 @@ class Customfield < ActiveRecord::Base
   validates_numericality_of :display_width, :only_integer => true, :allow_blank => true, :message => "^Width can only be whole number."
   validates_numericality_of :max_size, :only_integer => true, :allow_blank => true, :message => "^Max size can only be whole number."
 
-  ## TODO - Added for now but need to get simple_column_search working later
-  simple_column_search :field_name, :field_label, :table_name, :escape => lambda { |query| query.gsub(/[^\w\s\-\.']/, "").strip }
-
   SORT_BY = {
     "field name"         => "customfields.field_name ASC",
     "field label"        => "customfields.field_label DESC",

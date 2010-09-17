@@ -6,3 +6,4 @@ require "crm_super_tags/helpers"                # include Helper extensions
 require "crm_super_tags/tag"                    # Extend tag model to have customfields
 require "crm_super_tags/supertag_view_hooks"    # Define view hooks that provide super tag support
 
+ActionView::Base.send(:include, SuperTagHelper)
