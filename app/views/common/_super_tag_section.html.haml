@@ -3,7 +3,7 @@
 - # allow overriding of 'collapsed' options via direct url param
 - #collapsed = params[:collapsed] == "yes" if not params[:collapsed].nil?
 - collapsed = false  # Supertag fields are always un-collapsed until toggled.
-= subtitle association, collapsed, super_tag.name
+= subtitle association, collapsed, "#{super_tag.name} Fields"
 .section
   %small{ {:id => association + '_intro'}.merge(hidden_if(!collapsed)) }
     = "Custom fields for #{super_tag.name}"

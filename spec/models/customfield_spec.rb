@@ -40,4 +40,17 @@ describe Customfield do
       :tag => Factory(:tag)
     )
   end
+  
+
+  it "should be able to use a form_field_macro to set defined values" do
+    c = Customfield.new
+    c.form_field_macro = "number"
+    c.form_field_type = "number"
+    c.field_type.should == "DECIMAL"
+    c.display_width.should == 60
+    
+    c.form_field_macro = "short_answer"
+    c.field_type.should == "VARCHAR(255)"
+    c.display_width.should == 200
+  end
 end

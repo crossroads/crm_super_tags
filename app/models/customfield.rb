@@ -41,8 +41,10 @@ class Customfield < ActiveRecord::Base
   belongs_to :user
   belongs_to :tag, :class_name => 'ActsAsTaggableOn::Tag'
 
-  FIELD_TYPES = %w[INTEGER DECIMAL FLOAT VARCHAR(255) DATE DATETIME TEXT]
+  before_validation :set_defaults, :on => :create
 
+  FIELD_TYPES = %w[INTEGER DECIMAL FLOAT VARCHAR(255) DATE DATETIME TEXT]
+  
   ## Default validations for model
   #
   validates_presence_of :tag, :message => "^Please specify a Super Tag."
@@ -59,7 +61,6 @@ class Customfield < ActiveRecord::Base
   validates_inclusion_of :field_type, :in => FIELD_TYPES, :message => "^Hack alert::Field type Please dont change the HTML source of this application."
 
   validates_presence_of :display_width, :message => "^Please enter a Width."
-  validates_presence_of :max_size, :message => "^Please enter a Max Size."
 
   validates_numericality_of :display_width, :only_integer => true, :allow_blank => true, :message => "^Width can only be whole number."
   validates_numericality_of :max_size, :only_integer => true, :allow_blank => true, :message => "^Max size can only be whole number."
@@ -77,6 +78,15 @@ class Customfield < ActiveRecord::Base
 
   after_create :add_column
   after_validation :update_column, :on => :update
+
+  def set_defaults
+    self.display_width ||= 220
+    if self.field_name.blank? and self.field_label
+      column_name = self.field_label.underscore.gsub(/[_ ]+/,'_').gsub(/[^a-z0-9_]/,'')
+      column_name << "_customfield" if self.respond_to?(column_name)
+      self.field_name = column_name
+    end
+  end
 
   def tag_class_name
     "Tag#{self.tag_id}" if self.tag_id
@@ -101,10 +111,9 @@ class Customfield < ActiveRecord::Base
     if self.errors.empty?
       if self.field_name_changed?
         connection.rename_column(self.table_name, self.field_name_was, self.field_name)
-        tag_class.reset_column_information
       end
 
-      if self.required_changed?
+      if self.required_changed? || self.field_name_changed?
         Object.send(:remove_const, tag_class_name.to_sym)
       end
     end
@@ -120,5 +129,15 @@ class Customfield < ActiveRecord::Base
   def name
     self.field_name
   end
+  
+  # Handle 'form_field_type=' to allow a specific set of form field types from a hash
+  #----------------------------------------------------------------------------
+  def form_field_type=(macro)
+    if Customfield.form_field_types[macro]
+      self.update_attributes(Customfield.form_field_types[macro][:attributes])
+    end
+    super
+  end
+    
 end
 

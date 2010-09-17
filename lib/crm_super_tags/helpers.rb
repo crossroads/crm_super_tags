@@ -10,10 +10,12 @@ ApplicationHelper.module_eval do
     before_hook = id.to_s.start_with?("create_") ? "if(crm.close_all_forms) crm.close_all_forms();" : ""
 
     link_to_remote(text,
-      :url    => url,
+      {:url    => url,
       :method => :get,
       :with   => "{ cancel: Element.visible('#{id}')#{related} }",
-      :before => before_hook
+      :before => before_hook},
+      :class  => options[:class],
+      :id     => options[:id]
     )
   end
 

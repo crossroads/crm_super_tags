@@ -11,10 +11,13 @@
 
 -#-----------------------------------------------------------------------------
 %br
-= link_to_inline :create_customfield, new_admin_customfield_path(:tag_id => @super_tag.id), { :class => "subtitle_customfields", :related => dom_id(@super_tag), :text => t(:create_customfield) }
-.subtitle#create_customfield_title #{t :customfields}
+.subtitle_tools
+  = link_to_inline :create_customfield, new_admin_customfield_path(:tag_id => @super_tag.id), { :class => "subtitle_customfields", :related => dom_id(@super_tag), :text => t(:create_customfield) }
+.subtitle#create_customfield_title
+  = t :customfields
 .remote#create_customfield{ hidden }
 .list#customfields
   = render :partial => "admin/customfields/customfield", :collection => @super_tag.customfields
 
 = hook(:show_super_tag_bottom, self)
+

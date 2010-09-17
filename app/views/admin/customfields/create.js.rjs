@@ -8,5 +8,6 @@ if @customfield.valid?
 else
   page[:create_customfield].replace_html :partial => "create"
   page[:create_customfield].visual_effect :shake, :duration => 0.25, :distance => 6
-  page[:customfield_field_name].focus
+  page[:customfield_field_label].focus
 end
+
