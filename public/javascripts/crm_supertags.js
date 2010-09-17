@@ -53,8 +53,3 @@ crm.close_all_forms = function() {
 // {'supertag' => 'div element id'}
 var loadedSupertagForms = new Hash();
 
-
-//-----------------------------------------------------------------------------
-// Attach a 'hover' event to the first link in .title_tools (create asset link),
-// shows an overlay with available supertags to use. (if .title_tools exists..)
-

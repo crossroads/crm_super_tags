@@ -6,16 +6,11 @@
   %tt
     Label
     %b
-      - if customfield.field_label?
-        = customfield.field_label
-    name
-    %b
-      - if customfield.field_name?
-        = customfield.field_name
-    for table
-    %b
-      - if customfield.table_name?
-        = customfield.table_name.pluralize
+      = customfield.field_label
+    - if field_type = Customfield.form_field_types[customfield.form_field_type]
+      with type
+      %b
+        = field_type[:name]
 
     == added #{time_ago_in_words(customfield.created_at)} ago
     = hook(:customfield_bottom, self, :customfield => customfield)

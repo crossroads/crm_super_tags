@@ -44,7 +44,7 @@ class Customfield < ActiveRecord::Base
   before_validation :set_defaults, :on => :create
 
   FIELD_TYPES = %w[INTEGER DECIMAL FLOAT VARCHAR(255) DATE DATETIME TEXT]
-
+  
   ## Default validations for model
   #
   validates_presence_of :tag, :message => "^Please specify a Super Tag."
@@ -84,7 +84,7 @@ class Customfield < ActiveRecord::Base
 
   def set_defaults
     self.display_width ||= 220
-    if self.field_name.blank?
+    if self.field_name.blank? and self.field_label
       column_name = self.field_label.underscore.gsub(/[_ ]+/,'_').gsub(/[^a-z0-9_]/,'')
       column_name << "_customfield" if self.respond_to?(column_name)
       self.field_name = column_name
@@ -132,5 +132,15 @@ class Customfield < ActiveRecord::Base
   def name
     self.field_name
   end
+  
+  # Handle 'form_field_type=' to allow a specific set of form field types from a hash
+  #----------------------------------------------------------------------------
+  def form_field_type=(macro)
+    if Customfield.form_field_types[macro]
+      self.update_attributes(Customfield.form_field_types[macro][:attributes])
+    end
+    super
+  end
+    
 end
 

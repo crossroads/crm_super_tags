@@ -29,6 +29,6 @@ else # <----------------------------------------- Show [Edit Customfield] form.
     page.call "crm.set_title", :edit_customfield, "Edit #{@customfield.field_label}"
   end
 
-  page[:customfield_field_name].focus
+  page[:customfield_field_label].focus
 
 end
