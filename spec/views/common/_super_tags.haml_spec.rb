@@ -16,7 +16,7 @@ describe "common/_super_tags.html.haml" do
       render
     end
 
-    view.should render_template(:partial => "/common/super_tag_section")
+    view.should render_template(:partial => "/common/_super_tag_section")
 
     rendered.should have_tag("input[id=opportunity_tag1_attributes_test]")
   end
