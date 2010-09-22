@@ -1,5 +1,4 @@
-- controller = params[:controller]
-- asset = controller.singularize
+- asset = controller_name.singularize
 - tag_forms = {}
 #super_tags
   - f.object.tags.each do |super_tag|
@@ -14,4 +13,3 @@
       // Reset 'loadedSupertagForms' hash.
       loadedSupertagForms = $H(#{tag_forms.to_json});
     }
-

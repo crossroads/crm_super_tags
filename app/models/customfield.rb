@@ -44,7 +44,7 @@ class Customfield < ActiveRecord::Base
   before_validation :set_defaults, :on => :create
 
   FIELD_TYPES = %w[INTEGER DECIMAL FLOAT VARCHAR(255) DATE DATETIME TEXT]
-  
+
   ## Default validations for model
   #
   validates_presence_of :tag, :message => "^Please specify a Super Tag."
@@ -121,15 +121,15 @@ class Customfield < ActiveRecord::Base
 
   # Default values provided through class methods.
   #----------------------------------------------------------------------------
-  def self.per_page ;  20                         ; end
-  def self.outline  ;  "long"                      ; end
-  def self.sort_by  ;  "customfields.created_at DESC" ; end
+  def self.per_page ; 20                             ; end
+  def self.outline  ; "long"                         ; end
+  def self.sort_by  ; "customfields.created_at DESC" ; end
 
   #----------------------------------------------------------------------------
   def name
     self.field_name
   end
-  
+
   # Handle 'form_field_type=' to allow a specific set of form field types from a hash
   #----------------------------------------------------------------------------
   def form_field_type=(macro)
@@ -138,6 +138,4 @@ class Customfield < ActiveRecord::Base
     end
     super
   end
-    
 end
-

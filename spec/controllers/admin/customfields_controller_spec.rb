@@ -35,14 +35,6 @@ describe Admin::CustomfieldsController do
     end
 
     describe "customfield got deleted or otherwise unavailable" do
-      it "should redirect to customfield index if the customfield got deleted" do
-        @customfield = Factory(:customfield, :user => @current_user)
-        @customfield.destroy
-        get :show, :id => @customfield.id
-        flash[:warning].should_not == nil
-        response.should redirect_to(admin_customfields_path)
-      end
-
       it "should return 404 (Not Found) XML error" do
         @customfield = Factory(:customfield, :user => @current_user)
         @customfield.destroy

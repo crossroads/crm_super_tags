@@ -28,7 +28,7 @@ Factory.define :customfield do |c|
   c.tag                 { |a| a.association(:tag) }
   c.field_name          "foo"
   c.field_label         "foo"
-  c.field_type          { Customfield::FIELD_TYPES.rand }
+  c.field_type          { Customfield::FIELD_TYPES.sample }
   c.display_width       { rand(100) + 100 }
   c.max_size            { rand(64) }
   c.required            false

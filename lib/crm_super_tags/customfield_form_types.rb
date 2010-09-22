@@ -1,5 +1,5 @@
 Customfield.class_eval do
-  
+
   def self.form_field_types
     @@form_field_types ||= YAML.load(%Q{
       ---
@@ -29,8 +29,8 @@ Customfield.class_eval do
           :display_width: 150
       number:
         :name: Number
-        :attributes: 
-          :field_type: INTEGER
+        :attributes:
+          :field_type: DECIMAL
           :display_width: 60
     })
   end

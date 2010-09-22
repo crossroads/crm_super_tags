@@ -4,14 +4,13 @@ describe "admin/customfields/show.html.haml" do
 
   before(:each) do
   login_and_assign(:admin => true)
-    assigns[:customfield] = Factory(:customfield, :id => 42)
-    assigns[:users] = [ @current_user ]
+    assign(:customfield, Factory(:customfield, :id => 42))
+    assign(:users, [ @current_user ])
   end
 
   it "should render customfield landing page" do
-    render "admin/customfields/show.html.haml"
+    render
 
-    response.should have_tag("div[id=edit_customfield]")
+    rendered.should have_tag("div[id=edit_customfield]")
   end
 end
-

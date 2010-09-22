@@ -19,11 +19,10 @@ describe SuperTag do
                           :field_label => 'one',
                           :field_type => 'VARCHAR(255)')
 
-    o = Factory(:opportunity)
+    o = Factory(:opportunity, :account => Factory(:account))
     o.attributes = {:tag1_attributes => {'one' => 'Test'}}
     o.save
     o.reload
     o.tag1.one.should == 'Test'
   end
 end
-

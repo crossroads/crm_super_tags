@@ -6,15 +6,18 @@ describe "common/_super_tags.html.haml" do
 
     @customfield = Factory(:customfield, :field_name => 'test', :field_type => 'VARCHAR(255)')
     @tag = @customfield.tag
-    assigns[:opportunity] = @opportunity = Factory(:opportunity, :tag_list => @tag.name)
+    assign(:opportunity, @opportunity = Factory(:opportunity, :account => Factory(:account), :tag_list => @tag.name))
   end
 
   it "should render [edit super tag] form" do
+
     fields_for @opportunity do |f|
-      render :partial => 'common/super_tags.html', :locals => {:f => f}
+      view.stub(:f) { f }
+      render
     end
 
-    response.should have_tag("input[id=opportunity_tag1_attributes_test]")
+    view.should render_template(:partial => "/common/super_tag_section")
+
+    rendered.should have_tag("input[id=opportunity_tag1_attributes_test]")
   end
 end
-

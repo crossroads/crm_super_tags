@@ -11,11 +11,10 @@ describe "admin/customfields/_edit.html.haml" do
   it "should render [edit customfield] form" do
     render
 
-    template.should render_template(:partial => "admin/customfields/_top_section")
+    view.should render_template(:partial => "admin/customfields/_top_section")
 
-    response.should have_tag("form[class=edit_customfield]") do
+    rendered.should have_tag("form[class=edit_customfield]") do
       with_tag "input[type=hidden][id=customfield_user_id][value=#{@customfield.user_id}]"
     end
   end
 end
-

@@ -11,9 +11,8 @@ describe "admin/customfields/_create.html.haml" do
   it "should render [create customfield] form" do
     render
 
-    template.should render_template(:partial => "admin/customfields/_top_section")
+    view.should render_template(:partial => "admin/customfields/_top_section")
 
-    response.should have_tag("form[class=new_customfield]")
+    rendered.should have_tag("form[class=new_customfield]")
   end
 end
-
