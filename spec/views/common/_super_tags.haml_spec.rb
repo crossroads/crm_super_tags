@@ -4,14 +4,14 @@ describe "common/_super_tags.html.haml" do
   before(:each) do
     login_and_assign(:admin => true)
 
-    @customfield = Factory(:customfield, :field_name => 'test', :field_type => 'VARCHAR(255)')
+    @customfield = Factory(:customfield, :field_name => 'test', :form_field_type => 'short_answer')
     @tag = @customfield.tag
     assign(:opportunity, @opportunity = Factory(:opportunity, :account => Factory(:account), :tag_list => @tag.name))
   end
 
   it "should render [edit super tag] form" do
 
-    fields_for @opportunity do |f|
+    view.fields_for @opportunity do |f|
       view.stub(:f) { f }
       render
     end
