@@ -9,7 +9,7 @@
   :javascript
     // if fbtaglist is initialized..
     if(fbtaglist) {
-      crm.set_tag_list_event('#{controller}', '#{asset}', '#{params[:id]}');
+      crm.set_tag_list_event('#{controller_name}', '#{asset}', '#{params[:id]}');
       // Reset 'loadedSupertagForms' hash.
       loadedSupertagForms = $H(#{tag_forms.to_json});
     }
