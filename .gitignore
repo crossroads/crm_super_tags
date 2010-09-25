@@ -11,3 +11,5 @@ spec/debug.log
 .DS_Store
 *~
 *.swp
+
+spec/reports
