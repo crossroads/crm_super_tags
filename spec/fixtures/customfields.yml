@@ -20,7 +20,7 @@
 #
 
 <% 
-  require "faker"
+  require "ffaker"
   puts "Loading customfields..."
 
   field_name = [ "", "skype_address", "voip_buster_address","task_cost"]
