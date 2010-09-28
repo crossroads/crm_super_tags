@@ -53,31 +53,27 @@ Feature: Manage custom fields by tag
     When I go to the admin super tags page
     And I follow "Local Order"
     And I follow "Create Customfield"
-    And I fill in the following:
-      |customfield[field_name]|goods_purpose|
-      |customfield[field_label]|Goods purpose|
-      |customfield[max_size]|1024|
-      |customfield[display_width]|60|
-    And I select "TEXT" from "customfield[field_type]"
+    And I fill in "customfield[field_label]" with "Goods purpose"
+    And I select "Short Answer" from "customfield[form_field_type]"
     And I press "Create Customfield"
     Then I should see "Goods purpose"
 
   Scenario: Admin user should be able to edit a customfield
     Given a logged in Admin user
     And a tag named "Local Order"
-    And a customfield named "goods_purpose"
+    And the tag has a customfield named "Goods purpose"
     When I go to the admin super tags page
     And I follow "Local Order"
     And I move the mouse over "customfield_1"
     And I follow "Edit" within "#customfield_1"
-    And I fill in "customfield[field_name]" with "request_purpose"
+    And I fill in "customfield[field_label]" with "Request Purpose"
     And I press "Save Customfield"
     Then I should see "request_purpose"
 
   Scenario: Admin user should be able to delete a customfield
     Given a logged in Admin user
     And a tag named "Local Order"
-    And a customfield named "goods_purpose"
+    And the tag has a customfield named "Goods purpose"
     When I go to the admin super tags page
     And I follow "Local Order"
     And I move the mouse over "customfield_1"

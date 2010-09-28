@@ -3,7 +3,11 @@ Given /^a tag named "([^"]+)"$/ do |name|
 end
 
 Given /^the tag has a customfield named "([^"]+)"$/ do |name|
-  Factory(:customfield, :field_name => name.downcase.gsub(' ', '_'), :field_label => name, :field_type => 'VARCHAR(255)', :tag => @tag)
+  Factory(:customfield, :field_name => name.downcase.gsub(' ', '_'),
+                        :field_label => name,
+                        :field_type => 'VARCHAR(255)',
+                        :form_field_type => 'short_answer',
+                        :tag => @tag)
 end
 
 Given /^the following tags:$/ do |tags|
