@@ -27,7 +27,10 @@ Feature: Add custom fields to content with super tags
     When I go to the opportunity page
     And I follow "Edit"
     Then I should see "(comma separated, letters and digits only)"
-    And I fill in "fblist-maininput" with "Local Order,, a normal tag,,," within "#facebook-list"
+    And I fill in "fblist-maininput" with "Local Order," within "#facebook-list"
+    And I emulate a separator keypress on the facebook tag list
+    And I fill in "fblist-maininput" with "a normal tag," within "#facebook-list"
+    And I emulate a separator keypress on the facebook tag list   
     Then I should see "Goods purpose:"
     When I fire the "click" event on css selector "#facebook-list a.closebutton"[0]
     And I fill in "fblist-maininput" with "another normal tag," within "#facebook-list"
@@ -40,7 +43,10 @@ Feature: Add custom fields to content with super tags
     When I go to the opportunities page
     And I follow "Create Opportunity"
     And I fill in "opportunity_name" with "Local Order #L4345"
-    And I fill in "fblist-maininput" with "Local Order,, normal tag,,," within "#facebook-list"
+    And I fill in "fblist-maininput" with "Local Order," within "#facebook-list"
+    And I emulate a separator keypress on the facebook tag list
+    And I fill in "fblist-maininput" with "a normal tag," within "#facebook-list"
+    And I emulate a separator keypress on the facebook tag list
     Then I should see "Goods purpose:"
     When I fill in "Goods purpose:" with "Furnishing apartment"
     And I press "Create Opportunity"
@@ -53,7 +59,10 @@ Feature: Add custom fields to content with super tags
     When I go to the opportunities page
     And I follow "Create Opportunity"
     And I fill in "opportunity_name" with ""
-    And I fill in "fblist-maininput" with "Local Order,, another tag,,," within "#facebook-list"
+    And I fill in "fblist-maininput" with "Local Order," within "#facebook-list"
+    And I emulate a separator keypress on the facebook tag list
+    And I fill in "fblist-maininput" with "another tag," within "#facebook-list"
+    And I emulate a separator keypress on the facebook tag list 
     Then I should see "Goods purpose:"
     When I fill in "Goods purpose:" with "Furnishing apartment"
     And I press "Create Opportunity"

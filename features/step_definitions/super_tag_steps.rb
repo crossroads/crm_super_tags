@@ -31,3 +31,10 @@ Then /^(?:|I )should not be able to see \/([^\/]*)\/(?: within "([^"]*)")?$/ do 
   end
 end
 
+And /^I emulate a separator keypress on the facebook tag list$/ do
+  index ||= 0
+  begin
+    Capybara.current_session.driver.browser.execute_script("fbtaglist.fireSeparatorEvent();")
+  rescue Capybara::NotSupportedByDriverError
+  end
+end
