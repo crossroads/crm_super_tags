@@ -12,7 +12,6 @@ Feature: Add custom fields to content with super tags
     And the opportunity is tagged with "Local Order"
     When I go to the opportunity page
     And I follow "Edit"
-    And I follow "Local Order" within "#edit_opportunity"
     And I fill in "Goods purpose:" with "Furnishing apartment"
     And I press "Save Opportunity"
     Then I should not see "Edit Refugee housing"
@@ -43,6 +42,8 @@ Feature: Add custom fields to content with super tags
     When I go to the opportunities page
     And I follow "Create Opportunity"
     And I fill in "opportunity_name" with "Local Order #L4345"
+    And I follow "create new" within "#account_select_title"
+    And I fill in "account_name" with "A Social Welfare Organisation"
     And I fill in "fblist-maininput" with "Local Order," within "#facebook-list"
     And I emulate a separator keypress on the facebook tag list
     And I fill in "fblist-maininput" with "a normal tag," within "#facebook-list"

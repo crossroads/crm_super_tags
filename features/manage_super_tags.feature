@@ -66,9 +66,11 @@ Feature: Manage custom fields by tag
     And I follow "Local Order"
     And I move the mouse over "customfield_1"
     And I follow "Edit" within "#customfield_1"
+    And I select "Long Answer" from "customfield[form_field_type]"
     And I fill in "customfield[field_label]" with "Request Purpose"
     And I press "Save Customfield"
-    Then I should see "request_purpose"
+    Then I should see "Request Purpose"
+    And I should see "Long Answer"
 
   Scenario: Admin user should be able to delete a customfield
     Given a logged in Admin user
