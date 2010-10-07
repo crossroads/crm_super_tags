@@ -14,9 +14,10 @@ Feature: Add custom fields to content with super tags
     And I follow "Edit"
     And I fill in "Goods purpose:" with "Furnishing apartment"
     And I press "Save Opportunity"
-    Then I should not see "Edit Refugee housing"
+    Then I should not see "Local Order Fields"
     When I follow "Edit"
-    Then the "Goods purpose:" field should contain "Furnishing apartment"
+    Then I should see "Local Order Fields"
+    And the "Goods purpose:" field should contain "Furnishing apartment"
 
   Scenario: Super tag fields should be AJAX loaded when the tags input is changed
     Given a logged in user

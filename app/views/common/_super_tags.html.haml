@@ -1,4 +1,5 @@
 - asset = controller_name.singularize
+- f.object.tags = unsaved_param_tags(asset) if params[asset] && params[asset][:tag_list]
 - tag_forms = {}
 #super_tags
   - f.object.tags.each do |super_tag|
