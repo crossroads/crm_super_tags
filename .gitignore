@@ -12,4 +12,5 @@ spec/debug.log
 *~
 *.swp
 
-spec/reports/*
+*/reports/*
+
