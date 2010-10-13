@@ -18,4 +18,6 @@
                 - if custom
                   .label.top.req
                     = tag_form.label custom.field_name, custom.field_label + ':'
+                    - if custom.field_info
+                      = image_tag "info_tiny.png", :title => custom.field_info, :class => "tooltip-icon"
                   = customfield_tag tag_form, super_tag, custom

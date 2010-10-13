@@ -15,5 +15,8 @@ fields_for(@asset) do |f|
   page[:super_tags].insert sections
 
   page << "loadedSupertagForms.update(#{tag_forms.to_json});"
+  
+  # Initialize tooltips (if any)
+  page << initialize_tooltips_js("#super_tags img.tooltip-icon")
 end
 
