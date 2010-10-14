@@ -138,4 +138,15 @@ class Customfield < ActiveRecord::Base
     end
     super
   end
+  
+  def display_value(tag_table_object)
+    value = tag_table_object.send(self.field_name)
+    case form_field_type
+    when "checkbox"
+      value == 0 ? "no" : "yes"
+    else
+      value.to_s
+    end
+  end
+  
 end
