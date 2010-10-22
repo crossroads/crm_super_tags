@@ -20,11 +20,11 @@ ApplicationHelper.module_eval do
   end
 
   def initialize_tooltips_js(selector)
-    %Q^ 
-      $$("#{selector}").each( function(el) {
+    %Q"
+      $$('#{selector}').each( function(el) {
         new Tooltip(el, {mouseFollow: false});
-      }); 
-    ^
+      });
+    "
   end
 
 end
