@@ -26,11 +26,8 @@ end
 Factory.define :customfield do |c|
   c.user                { |a| a.association(:user) }
   c.tag                 { |a| a.association(:tag) }
-  c.field_name          "foo"
-  c.field_label         "foo"
-  c.field_type          { Customfield::FIELD_TYPES.sample }
-  c.display_width       { rand(100) + 100 }
-  c.max_size            { rand(64) }
+  c.field_label         { Faker::Name.first_name }
+  c.form_field_type     "short_answer"
   c.required            false
   c.disabled            false
   c.updated_at          { Factory.next(:time) }

@@ -10,12 +10,15 @@ module SuperTagHelper
     when 'checkbox'
       f.check_box field.field_name
     when 'date'
-      page = f.text_field(field.field_name, params.merge(:id => field.field_name))
-      page << javascript_tag("crm.date_select_popup('#{field.field_name}', false, false);")
+      page = f.text_field(field.field_name, params)
+      # Grabs the element id from the created field, and initializes date select popup.
+      element_id = page[/id="([a-z0-9_]*)"/, 1]
+      page << javascript_tag("crm.date_select_popup('#{element_id}', false, false);")
       page
     when 'datetime'
-      page = f.text_field(field.field_name, params.merge(:id => field.field_name))
-      page << javascript_tag("crm.date_select_popup('#{field.field_name}', false, true);")
+      page = f.text_field(field.field_name, params)
+      element_id = page[/id="([a-z0-9_]*)"/, 1]
+      page << javascript_tag("crm.date_select_popup('#{element_id}', false, true);")
       page
     end
   end

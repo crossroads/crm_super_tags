@@ -2,11 +2,12 @@ Given /^a tag named "([^"]+)"$/ do |name|
   @tag = Factory(:tag, :name => name)
 end
 
-Given /^the tag has a customfield named "([^"]+)"$/ do |name|
-  Factory(:customfield, :field_name => name.downcase.gsub(' ', '_'),
-                        :field_label => name,
-                        :field_type => 'VARCHAR(255)',
-                        :form_field_type => 'short_answer',
+Given /^the tag has a (.*)customfield named "([^"]+)"$/ do |field_type, name|
+  field_type = "short_answer" if field_type.blank?
+  field_type.strip!
+
+  Factory(:customfield, :field_label => name,
+                        :form_field_type => field_type,
                         :tag => @tag)
 end
 
