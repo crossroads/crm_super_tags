@@ -4,7 +4,7 @@ describe "common/_super_tags.html.haml" do
   before(:each) do
     login_and_assign(:admin => true)
 
-    @customfield = Factory(:customfield, :field_name => 'test', :form_field_type => 'short_answer')
+    @customfield = Factory(:customfield, :field_label => 'Test', :form_field_type => 'short_answer')
     @tag = @customfield.tag
     assign(:opportunity, @opportunity = Factory(:opportunity, :account => Factory(:account), :tag_list => @tag.name))
   end
