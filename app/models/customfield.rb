@@ -43,7 +43,7 @@ class Customfield < ActiveRecord::Base
 
   before_validation :set_defaults, :on => :create
 
-  FIELD_TYPES = %w[INTEGER DECIMAL FLOAT VARCHAR(255) DATE DATETIME TEXT]
+  FIELD_TYPES = %w[INTEGER DECIMAL FLOAT VARCHAR(255) DATE TIMESTAMP TEXT]
 
   ## Default validations for model
   #
@@ -138,7 +138,7 @@ class Customfield < ActiveRecord::Base
     end
     super
   end
-  
+
   def display_value(tag_table_object)
     if tag_table_object
       value = tag_table_object.send(self.field_name)
@@ -150,5 +150,5 @@ class Customfield < ActiveRecord::Base
       end
     end
   end
-  
+
 end

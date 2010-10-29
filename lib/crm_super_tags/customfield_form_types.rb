@@ -25,7 +25,7 @@ Customfield.class_eval do
       datetime:
         :name: "Date & Time"
         :attributes:
-          :field_type: DATETIME
+          :field_type: TIMESTAMP
           :display_width: 150
       number:
         :name: Number
