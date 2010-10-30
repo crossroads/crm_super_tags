@@ -1,10 +1,4 @@
-require "crm_super_tags/load_missing_constant"  # Build Tag%{id} classes
-require "crm_super_tags/super_tag"              # Super tag mixin
-require "crm_super_tags/models"                 # include Super tags
-require "crm_super_tags/controllers"            # include Controller extensions
-require "crm_super_tags/helpers"                # include Helper extensions
-require "crm_super_tags/tag"                    # Extend tag model to have customfields
-require "crm_super_tags/supertag_view_hooks"    # Define view hooks that provide super tag support
-require "crm_super_tags/customfield_form_types" # Define form field types for customfields
+# Require all files in lib/crm_* plugin directory
+Dir.glob(File.join(File.dirname(__FILE__), "crm_*", "*.rb")).each {|f| require f }
 
 ActionView::Base.send(:include, SuperTagHelper)
