@@ -11,6 +11,11 @@ plugin_spec_dir = File.dirname(__FILE__)
 ActiveRecord::Base.logger = Logger.new(plugin_spec_dir + "/debug.log")
 
 require 'database_cleaner'
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.class_eval do
+  def truncate_table(table_name)
+    execute("TRUNCATE TABLE #{quote_table_name(table_name)} #{cascade} RESTART IDENTITY;")
+  end
+end
 DatabaseCleaner.strategy = :truncation, {:except => ['settings']}
 
 RSpec.configure do |config|
