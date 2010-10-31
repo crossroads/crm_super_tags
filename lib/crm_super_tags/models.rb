@@ -1,3 +1,5 @@
+require File.join(File.dirname(__FILE__), 'super_tag')
+
 [ Account, Campaign, Contact, Lead, Opportunity ].each do |klass|
   klass.class_eval do
     include SuperTag
