@@ -13,7 +13,7 @@ ActiveRecord::Base.logger = Logger.new(plugin_spec_dir + "/debug.log")
 require 'database_cleaner'
 ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.class_eval do
   def truncate_table(table_name)
-    execute("TRUNCATE TABLE #{quote_table_name(table_name)} #{cascade} RESTART IDENTITY;")
+    execute("TRUNCATE TABLE #{quote_table_name(table_name)} RESTART IDENTITY #{cascade};")
   end
 end
 DatabaseCleaner.strategy = :truncation, {:except => ['settings']}
