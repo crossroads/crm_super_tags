@@ -43,7 +43,7 @@ class Customfield < ActiveRecord::Base
 
   before_validation :set_defaults, :on => :create
 
-  FIELD_TYPES = %w[INTEGER DECIMAL FLOAT VARCHAR(255) DATE TIMESTAMP TEXT]
+  FIELD_TYPES = %w[INTEGER BOOLEAN DECIMAL FLOAT VARCHAR(255) DATE TIMESTAMP TEXT]
 
   ## Default validations for model
   #

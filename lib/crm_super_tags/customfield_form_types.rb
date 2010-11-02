@@ -16,7 +16,7 @@ Customfield.class_eval do
       checkbox:
         :name: Checkbox
         :attributes:
-          :field_type: INTEGER
+          :field_type: BOOLEAN
       date:
         :name: Date
         :attributes:
