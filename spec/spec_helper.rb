@@ -16,6 +16,7 @@ ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.class_eval do
     execute("TRUNCATE TABLE #{quote_table_name(table_name)} RESTART IDENTITY #{cascade};")
   end
 end
+DatabaseCleaner.app_root = ::Rails.root
 DatabaseCleaner.strategy = :truncation, {:except => ['settings']}
 
 RSpec.configure do |config|
