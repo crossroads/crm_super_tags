@@ -9,6 +9,10 @@
         .label.top.req Field type:
         = f.select :form_field_type, Customfield.form_field_types.map{|a,b|[b[:name],a]}.sort{|a,b|a[0]<=>b[0]}, { :style => "width:140px", :disabled => @disabled }
     %tr
+      %td{ :valign => :top, :colspan => 2 }
+        .label.top.req Select Options (pipe separated):
+        = f.text_field :select_options, :style => "width:300px"
+    %tr
       %td{ :valign => :top }
         .label.top.req Required:
         = f.check_box :required

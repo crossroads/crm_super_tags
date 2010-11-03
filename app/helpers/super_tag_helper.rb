@@ -7,6 +7,8 @@ module SuperTagHelper
       f.text_field field.field_name, params
     when 'long_answer'
       f.text_area field.field_name, params.merge(:style => params[:style] += " height: #{(field.display_width * 1/2).to_i}px;")
+    when 'select_list'
+      f.select field.field_name, field.select_options.split("|").map(&:strip), params
     when 'checkbox'
       f.check_box field.field_name
     when 'date'

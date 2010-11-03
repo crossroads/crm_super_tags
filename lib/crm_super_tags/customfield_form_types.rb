@@ -13,6 +13,11 @@ Customfield.class_eval do
         :attributes:
           :field_type: TEXT
           :display_width: 250
+      select_list:
+        :name: Dropdown List
+        :attributes:
+          :field_type: VARCHAR(255)
+          :display_width: 200
       checkbox:
         :name: Checkbox
         :attributes:
