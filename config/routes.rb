@@ -1,4 +1,4 @@
-FatFreeCrm::Application.routes.draw do
+FatFreeCRM::Application.routes.draw do
 
   namespace :admin do
     resources :super_tags do
