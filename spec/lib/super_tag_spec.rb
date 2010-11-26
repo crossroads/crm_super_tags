@@ -2,8 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe SuperTag do
   before(:each) do
-    # Tests pass perfectly without dropping the tables between each step...
-    # SuperTag::Clean.drop_tables
+#    SuperTag::Clean.drop_tables
+#    DatabaseCleaner.clean
   end
 
   it "should define tag1" do
