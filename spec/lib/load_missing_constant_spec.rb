@@ -16,8 +16,8 @@ describe "load_missing_constant" do
   end
 
   it "should validate required fields" do
-    Factory(:customfield, :field_name => 'one', :field_type => 'VARCHAR(255)', :required => true)
-    Tag1.create.should have(1).error_on(:one)
+    c = Factory(:customfield, :field_name => 'one', :field_type => 'VARCHAR(255)', :required => true)   
+    "Tag#{c.tag.id}".constantize.create.should have(1).error_on(:one)
   end
 end
 
