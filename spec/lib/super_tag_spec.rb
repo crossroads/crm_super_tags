@@ -15,14 +15,14 @@ describe SuperTag do
   end
 
   it "should accept nested attributes for tag1" do
-    Factory(:customfield, :field_name => 'one',
-                          :field_label => 'one',
-                          :field_type => 'VARCHAR(255)')
+    c = Factory(:customfield, :field_name => 'one',
+                              :field_label => 'one',
+                              :field_type => 'VARCHAR(255)')
 
     o = Factory(:opportunity, :account => Factory(:account))
-    o.attributes = {:tag1_attributes => {'one' => 'Test'}}
+    o.attributes = {:"tag#{c.tag.id}_attributes" => {'one' => 'Test'}}
     o.save
     o.reload
-    o.tag1.one.should == 'Test'
+    o.send("tag#{c.tag.id}").one.should == 'Test'
   end
 end
