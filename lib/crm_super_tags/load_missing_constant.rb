@@ -17,7 +17,7 @@ ActiveSupport::Dependencies.class_eval do
           validates_presence_of :customizable_type
 
           Customfield.where(:tag_id => $1, :required => true).each do |custom|
-            validates_presence_of custom.field_name
+            validates_presence_of custom.field_name, :message => "^#{ActsAsTaggableOn::Tag.find($1).name} #{custom.field_label} can't be blank."
           end
         end
 
