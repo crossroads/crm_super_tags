@@ -18,6 +18,11 @@ Customfield.class_eval do
         :attributes:
           :field_type: VARCHAR(255)
           :display_width: 200
+      multi_select:
+        :name: Checkbox List
+        :attributes:
+          :field_type: VARCHAR(255)
+          :display_width: 200
       checkbox:
         :name: Checkbox
         :attributes:

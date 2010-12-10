@@ -19,6 +19,10 @@ ActiveSupport::Dependencies.class_eval do
           Customfield.where(:tag_id => $1, :required => true).each do |custom|
             validates_presence_of custom.field_name, :message => "^#{ActsAsTaggableOn::Tag.find($1).name} #{custom.field_label} can't be blank."
           end
+
+          Customfield.where(:tag_id => $1, :form_field_type => 'multi_select').each do |custom|
+            serialize(custom.field_name)
+          end
         end
 
         Object.const_set(const_name, klass)
