@@ -14,11 +14,10 @@
         - super_tag.customfields.in_groups_of(2) do |group|
           %tr
             - group.each do |custom|
-              %td{ :valign => :top }
+              %td
                 - if custom
                   %div{ :class => (custom.required? ? "label top req" : "label top") }
                     = tag_form.label custom.field_name, custom.field_label + ':'
                     - if custom.field_info
                       = image_tag "info_tiny.png", :title => custom.field_info, :class => "tooltip-icon"
-                  %br
                   = customfield_tag tag_form, super_tag, custom
