@@ -14,7 +14,9 @@ module SuperTagHelper
     when 'checkbox'
       f.check_box field.field_name
     when 'date'
-      page = f.text_field(field.field_name, params.update({:value => f.object.send(field.field_name).strftime("%d/%m/%Y")}))
+      date = f.object.send(field.field_name)
+      date = date.strftime("%d/%m/%Y") if date
+      page = f.text_field(field.field_name, params.update({:value => date}))
       # Grabs the element id from the created field, and initializes date select popup.
       element_id = page[/id="([a-z0-9_]*)"/, 1]
       page << javascript_tag("crm.date_select_popup('#{element_id}', false, false);")
