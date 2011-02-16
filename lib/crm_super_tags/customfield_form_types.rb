@@ -19,7 +19,7 @@ Customfield.class_eval do
           :field_type: VARCHAR(255)
           :display_width: 200
       multi_select:
-        :name: Checkbox List
+        :name: Multi-select Dropdown List
         :attributes:
           :field_type: VARCHAR(255)
           :display_width: 200
@@ -46,3 +46,4 @@ Customfield.class_eval do
   end
 
 end
+
