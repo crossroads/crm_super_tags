@@ -4,10 +4,22 @@
       = link_to_edit(super_tag, :url => edit_admin_super_tag_path(super_tag)) + " | "
       = link_to_delete(super_tag, :url => admin_super_tag_path(super_tag))
   %tt
-    Name
     %b
       = link_to(h(super_tag.name), admin_super_tag_path(super_tag))
+    |
+  - if super_tag.taggable_type.present?
+    %tt
+      Only Applies To:
+      %b
+        = super_tag.taggable_type
+      |
+  - if super_tag.customfields.any?
+    %tt
+      Fields:
+      %b
+        = super_tag.customfields.map(&:field_label).join(', ')
+      |
+  == added #{time_ago_in_words(super_tag.created_at)} ago
 
-    == added #{time_ago_in_words(super_tag.created_at)} ago
+  = hook(:super_super_tag_bottom, self, :super_tag => super_tag)
 
-    = hook(:super_super_tag_bottom, self, :super_tag => super_tag)
