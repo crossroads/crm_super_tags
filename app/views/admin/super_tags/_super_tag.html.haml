@@ -17,7 +17,8 @@
     %tt
       Fields:
       %b
-        = super_tag.customfields.map(&:field_label).join(', ')
+        = super_tag.customfields.map{|c|[c.field_label,c.form_field_type]}.map{|f, t| "#{f} (#{t.gsub('_',' ')})"}.join(', ')
+        -# Produces: "Description (long answer), Registration (long answer)"
       |
   == added #{time_ago_in_words(super_tag.created_at)} ago
 
