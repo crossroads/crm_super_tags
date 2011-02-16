@@ -27,3 +27,21 @@
 
     = hook(:customfield_top_section_bottom, self, :f => f)
 
+    :javascript
+      Event.observe($('customfield_form_field_type'),'change',function(){
+        var select_el = $('customfield_select_options');
+        switch($('customfield_form_field_type').value){
+          // fall-through switch statement for both 'select_list' and 'multi_select' (see this thread for info: http://www.webdeveloper.com/forum/showthread.php?t=191026)
+          case "select_list":
+          case "multi_select":
+            select_el.show().previous().show().innerHTML = "Select Options (pipe separated):";
+            break;
+          case "checkbox":
+            select_el.show().previous().show().innerHTML = "Checkbox Value:";
+            break;
+          default:
+            select_el.hide().previous().hide();
+        }
+      });
+      fireEvent($('customfield_form_field_type'), 'change');
+
