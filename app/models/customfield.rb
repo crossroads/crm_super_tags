@@ -38,6 +38,8 @@
 #
 
 class Customfield < ActiveRecord::Base
+  acts_as_list
+
   belongs_to :user
   belongs_to :tag, :class_name => 'ActsAsTaggableOn::Tag'
 

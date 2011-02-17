@@ -20,6 +20,14 @@ class Admin::CustomfieldsController < Admin::ApplicationController
   before_filter :set_current_tab, :only => [ :index, :show ]
   before_filter :auto_complete, :only => :auto_complete
 
+  def sort
+    params[:customfields].each_with_index do |id, index|
+      Customfield.update_all(['position=?', index+1], ['id=?', id])
+    end
+    render :nothing => true
+  end
+
+
   # GET /customfields/1
   # GET /customfields/1.xml                                                    HTML
   #----------------------------------------------------------------------------
@@ -210,3 +218,4 @@ class Admin::CustomfieldsController < Admin::ApplicationController
     end
   end
 end
+

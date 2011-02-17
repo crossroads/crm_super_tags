@@ -1,4 +1,5 @@
 %li[customfield]{ highlightable(dom_id(customfield, :tools)) }
+  %span.handle <img src="/images/sortable.gif">
   .tools{ invisible, :id => dom_id(customfield, :tools) }
     %small
       = link_to_edit(customfield, :url => edit_admin_customfield_path(customfield)) + " | "

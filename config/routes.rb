@@ -16,9 +16,11 @@ FatFreeCRM::Application.routes.draw do
         get :options
         post :redraw
         get :search
+        post :sort
       end
     end
   end
 
   match ':controller/super_tags' => '#super_tags'
 end
+

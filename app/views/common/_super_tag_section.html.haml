@@ -11,7 +11,7 @@
     %table{ :width => 500, :cellpadding => 0, :cellspacing => 0 }
       - object = f.object.send(association) || f.object.send("build_#{association}")
       = f.fields_for association, object do |tag_form|
-        - super_tag.customfields.in_groups_of(2) do |group|
+        - super_tag.customfields.sort{|a,b| a.position <=> b.position }.in_groups_of(2) do |group|
           %tr
             - group.each do |custom|
               %td
@@ -21,3 +21,4 @@
                     - if custom.field_info
                       = image_tag "info_tiny.png", :title => custom.field_info, :class => "tooltip-icon"
                   = customfield_tag tag_form, super_tag, custom
+

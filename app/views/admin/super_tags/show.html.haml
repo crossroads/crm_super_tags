@@ -17,7 +17,9 @@
   = t :customfields
 .remote#create_customfield{ hidden }
 .list#customfields
-  = render :partial => "admin/customfields/customfield", :collection => @super_tag.customfields
+  = render :partial => "admin/customfields/customfield", :collection => @super_tag.customfields.sort {|a,b| a.position <=> b.position }
 
 = hook(:show_super_tag_bottom, self)
+
+= sortable_element("customfields", :url => sort_admin_customfields_path, :handle => "handle")
 
