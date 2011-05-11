@@ -6,7 +6,7 @@ Customfield.class_eval do
       short_answer:
         :name: Short Answer
         :attributes:
-          :field_type: VARCHAR(255)
+          :field_type: TEXT
           :display_width: 200
       long_answer:
         :name: Long Answer
@@ -16,12 +16,12 @@ Customfield.class_eval do
       select_list:
         :name: Dropdown List
         :attributes:
-          :field_type: VARCHAR(255)
+          :field_type: TEXT
           :display_width: 200
       multi_select:
         :name: Multi-select Dropdown List
         :attributes:
-          :field_type: VARCHAR(255)
+          :field_type: TEXT
           :display_width: 200
       checkbox:
         :name: Checkbox
