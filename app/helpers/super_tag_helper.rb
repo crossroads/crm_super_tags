@@ -10,7 +10,9 @@ module SuperTagHelper
     when 'select_list'
       f.select field.field_name, field.select_options.split('|').map(&:strip), params
     when 'multi_select'
-      f.select field.field_name, field.select_options.split('|').map(&:strip), params, :multiple => true
+      page = f.select field.field_name, field.select_options.split('|').map(&:strip), params, :multiple => true
+      page << hidden_field_tag("#{f.object.customizable.class.name.downcase}[#{f.object.class.name.downcase}_attributes][#{field.field_name}][]", '')
+      page
     when 'checkbox'
       f.check_box field.field_name
     when 'date'
