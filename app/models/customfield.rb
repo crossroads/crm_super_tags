@@ -153,7 +153,7 @@ class Customfield < ActiveRecord::Base
         value && value.strftime("%d/%m/%Y %h:%m")
       when 'multi_select'
         # Comma separated, 2 per line.
-        (value || []).in_groups_of(2).map{|g| g[1] ? g.join(", ") : g[0] }.join('<br/>').html_safe
+        (value.blank? ? [] : value).in_groups_of(2).map{|g| g[1] ? g.join(", ") : g[0] }.join('<br/>').html_safe
       else
         value.to_s
       end

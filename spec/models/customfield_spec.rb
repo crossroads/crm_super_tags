@@ -48,7 +48,18 @@ describe Customfield do
     c.display_width.should == 60
 
     c.form_field_type = "short_answer"
-    c.field_type.should == "VARCHAR(255)"
+    c.field_type.should == "TEXT"
     c.display_width.should == 200
   end
+
+  it "should be able to display a empty multi_select value" do
+    c = Customfield.new
+    c.form_field_type = "multi_select"
+    c.field_name = "availability"
+    @tag_table = mock('TagTable')
+    @tag_table.stub!(:availability, "")
+
+    c.display_value(@tag_table).should == ""
+  end
 end
+
