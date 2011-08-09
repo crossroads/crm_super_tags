@@ -13,7 +13,7 @@ ActiveSupport::Dependencies.class_eval do
         end
 
         klass = Class.new ActiveRecord::Base do
-          belongs_to :customizable, :polymorphic => true
+          belongs_to :customizable, :polymorphic => true, :autosave => true
           validates_presence_of :customizable_type
 
           Customfield.where(:tag_id => $1, :required => true).each do |custom|
