@@ -9,7 +9,7 @@ Installation
 
 The super tags plugin can be installed by running:
 
-    script/install plugin git://github.com/crossroads/crm_super_tags.git
+    script/plugin install git://github.com/crossroads/crm_super_tags.git
 
 Then run the following command:
 
