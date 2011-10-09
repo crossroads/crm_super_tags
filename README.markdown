@@ -7,12 +7,13 @@ An admin interface lets you add custom fields to a tag. You can then tag any mod
 Installation
 ============
 
-1) This plugin requires the 'crm_tags' plugin. This plugin needs the acts-as-taggable-on-gem.
-   Add the following line to the bottom of your Gemfile:
+1) This plugin requires the 'crm_tags' plugin, and some gem dependencies.
+   Add these lines to the bottom of your Gemfile:
 
     gem 'acts-as-taggable-on', '>= 2.0.6'
+    gem 'acts_as_list'
 
-  Then run `bundle install` to install the gem.
+  Then run `bundle install`.
 
 2) Install the 'crm_tags' plugin:
 
@@ -27,4 +28,12 @@ Installation
     rake db:migrate:plugins
 
 5) Restart your web server.
+
+This plugin requires the 'crm_tags' plugin, and some gem dependencies.
+Add these lines to the bottom of your Gemfile:
+
+    gem 'acts-as-taggable-on', '>= 2.0.6'
+    gem 'acts_as_list'
+
+Then run `bundle install`.
 
