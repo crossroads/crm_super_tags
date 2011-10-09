@@ -15,17 +15,21 @@ Installation
 
   Then run `bundle install`.
 
+
 2) Install the 'crm_tags' plugin:
 
     rails plugin install git://github.com/crossroads/crm_tags.git
+
 
 3) Install the 'crm_super_tags' plugin:
 
     rails plugin install git://github.com/crossroads/crm_super_tags.git
 
-4) Run the plugin migrations:
+
+5) Run the plugin migrations:
 
     rake db:migrate:plugins
 
-5) Restart your web server.
+
+6) Restart your web server.
 
