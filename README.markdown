@@ -9,8 +9,7 @@ Installation
 
 1) This plugin requires the 'CRM Tags' plugin. Install this first by running:
 
-  rails plugin install git://github.com/crossroads/crm_tags.git
-
+    rails plugin install git://github.com/crossroads/crm_tags.git
 
 2) Install the super tags plugin:
 
