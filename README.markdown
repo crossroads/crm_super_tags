@@ -10,8 +10,6 @@ Installation
 1) This plugin requires the 'crm_tags' plugin. Install this and it's dependencies first by running:
 
     rails plugin install git://github.com/mbleigh/acts-as-taggable-on.git
-    rails generate acts_as_taggable_on_migration
-    rake db:migrate
     rails plugin install git://github.com/crossroads/crm_tags.git
 
 2) Install the super tags plugin:
