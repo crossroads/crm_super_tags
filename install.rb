@@ -5,6 +5,6 @@ The Super Tags plugin for Fat Free CRM is designed to let you store custom infor
 
 Once the plugin is installed run the following command:
 
-  rake db:migrate:plugin NAME=crm_customfields
+  rake db:migrate:plugin NAME=crm_supertags
 
 EOF
