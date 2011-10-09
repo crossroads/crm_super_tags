@@ -7,11 +7,12 @@ An admin interface lets you add custom fields to a tag. You can then tag any mod
 Installation
 ============
 
-1) This plugin requires the 'CRM Tags' plugin. Install this first by running:
+1) This plugin requires the 'crm_tags' plugin. Install this and it's dependencies first by running:
 
+    rails plugin install git://github.com/mbleigh/acts-as-taggable-on.git
+    rails generate acts_as_taggable_on_migration
+    rake db:migrate
     rails plugin install git://github.com/crossroads/crm_tags.git
-
-   Note: You don't need to run the migrations until after you have installed the super tags plugin.
 
 2) Install the super tags plugin:
 
