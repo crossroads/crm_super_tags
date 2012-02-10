@@ -1,4 +1,4 @@
-CRM Super Tags plugin for Fat Free CRM
+CRM Super Tags plugin for Fat Free CRM  - DEPRICATED only works on rails238 branch now in core
 ======================================
 
 This Fat Free CRM plugin depends on http://github.com/michaeldv/crm_tags and builds on the work started with http://github.com/bkd/crm_customfields
